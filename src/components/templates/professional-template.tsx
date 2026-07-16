@@ -95,8 +95,7 @@ export const ProfessionalTemplatePreview = ({ data, color, bgColor, textColor, f
                 <Image
                   src={data.personal.photo}
                   alt={data.personal.name}
-                  width={200}
-                  height={200}
+                  fill
                   className="object-cover"
                 />
               </div>

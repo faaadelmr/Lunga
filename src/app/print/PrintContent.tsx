@@ -6,7 +6,7 @@ import { TemplatePreviewComponent } from '@/components/template-preview';
 
 export default function PrintContent() {
   const searchParams = useSearchParams();
-  const [templateData, setTemplateData] = useState(null);
+  const [templateData, setTemplateData] = useState<any>(null);
 
   useEffect(() => {
     // Get the resume data from URL params or local storage

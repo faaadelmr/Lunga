@@ -52,7 +52,7 @@ export const AwesomeTemplatePreview = ({ data, color, bgColor, textColor, font, 
                     </div>
                 )}
                 <div className="absolute top-16 left-12 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-md">
-                    <h1 className="text-4xl font-bold">{data.personal.name}</h1>
+                    <h1 className="text-4xl font-bold text-slate-900">{data.personal.name}</h1>
                     <div className="px-4 py-1 mt-2 inline-block rounded-md" style={accentBgStyle}>
                         <p className="text-sm font-semibold text-white uppercase tracking-wider">{data.personal.role}</p>
                     </div>

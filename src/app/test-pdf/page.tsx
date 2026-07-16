@@ -88,7 +88,7 @@ export default function TestPdfPage() {
       console.log('PDF generated successfully!');
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Error generating PDF: ' + error.message);
+      alert('Error generating PDF: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setLoading(false);
     }

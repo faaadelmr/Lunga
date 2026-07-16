@@ -40,8 +40,8 @@ export const CooperTemplatePreview = ({ data, color, bgColor, textColor, font, l
         <div className="h-full flex" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
             {/* Left Column */}
             <aside className="w-1/3 p-8 flex flex-col items-center text-center overflow-y-auto" style={{ ...leftColBg, color: headerTextColor }}>
-                <h1 className="text-4xl font-bold uppercase">{data.personal.name.split(' ')[0]}</h1>
-                <h1 className="text-4xl font-bold uppercase">{data.personal.name.split(' ').slice(1).join(' ')}</h1>
+                <h1 className="text-4xl font-bold uppercase">{(data.personal.name || '').split(' ')[0]}</h1>
+                <h1 className="text-4xl font-bold uppercase">{(data.personal.name || '').split(' ').slice(1).join(' ')}</h1>
                 <div className="flex items-center gap-2 my-2" style={{ opacity: 0.8 }}>
                     <div className='w-2 h-2 rounded-full bg-current'></div>
                     <div className='w-2 h-2 rounded-full bg-current'></div>

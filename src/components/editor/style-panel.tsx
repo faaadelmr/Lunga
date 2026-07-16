@@ -142,7 +142,27 @@ const ColorPicker = ({ title, colors, selectedColor, onColorChange }: { title: s
   )
 }
 
-const TemplateCard = ({ template, isSelected, onClick, resumeData, color, bgColor, textColor }: { template: typeof templates[0], isSelected: boolean, onClick: () => void, resumeData: any, color: string, bgColor: string, textColor: string }) => {
+const TemplateCard = ({
+  template,
+  isSelected,
+  onClick,
+  resumeData,
+  color,
+  bgColor,
+  textColor,
+  font,
+  language
+}: {
+  template: typeof templates[0],
+  isSelected: boolean,
+  onClick: () => void,
+  resumeData: any,
+  color: string,
+  bgColor: string,
+  textColor: string,
+  font: Font,
+  language: Language
+}) => {
   const TemplateComponent = template.component;
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.2);
@@ -165,6 +185,8 @@ const TemplateCard = ({ template, isSelected, onClick, resumeData, color, bgColo
     return () => resizeObserver.disconnect();
   }, []);
 
+  const fontClass = `font-${font.toLowerCase().replace(' ', '-')}`;
+
   return (
     <Card
       onClick={onClick}
@@ -179,14 +201,22 @@ const TemplateCard = ({ template, isSelected, onClick, resumeData, color, bgColo
       <CardContent className="p-0">
         <div ref={containerRef} className="aspect-[210/297] w-full overflow-hidden bg-background relative">
           <div
-            className="absolute origin-top-left"
+            className={cn("absolute origin-top-left", fontClass)}
             style={{
               transform: `scale(${scale})`,
               transformOrigin: 'top left',
+              fontFamily: font,
             }}
           >
             <div className="w-[840px] h-[1188px]">
-              <TemplateComponent data={resumeData} color={color} bgColor={bgColor} textColor={textColor} />
+              <TemplateComponent
+                data={resumeData}
+                color={color}
+                bgColor={bgColor}
+                textColor={textColor}
+                font={font}
+                language={language}
+              />
             </div>
           </div>
         </div>
@@ -264,6 +294,8 @@ export function StylePanel() {
               color={selectedColor}
               bgColor={selectedBgColor}
               textColor={selectedTextColor}
+              font={selectedFont}
+              language={selectedLanguage}
             />
           ))}
         </div>

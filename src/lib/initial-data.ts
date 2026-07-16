@@ -10,25 +10,33 @@ export const initialData: ResumeData = {
     location: "Tangerang, Indonesia",
     website: "faaadelmr.pages.dev",
     photo: "",
-    description: "Mahasiswa yang lagi memperdalam teknik 'Pernapasan AI, gerakan pertama: aplikasi berbasis web'",
+    description: "Manusia yang entusias dengan website, game, pc dan teknologi lainnya. I use ai btw, suka mempelajari teknologi baru serta membuat sesuatu yang mempermudah pekerjaan ataupun kegiatan yang saya lakukan",
   },
   experience: [
     {
       id: "exp1",
-      company: "Teknologi Maju Nusantara",
-      role: "Senior Frontend Developer",
-      date: "Jan 2020 - Sekarang",
-      description: `- Memimpin tim dalam pengembangan platform e-commerce baru, yang menghasilkan peningkatan penjualan sebesar 30%.
-- Membimbing developer junior dan melakukan code review untuk memastikan kualitas kode.
-- Berkolaborasi dengan tim UX/UI untuk menerapkan antarmuka yang responsif dan aksesibel.`,
+      company: "ISOmedik",
+      role: "IT Junior",
+      date: "Feb 2026 - Sekarang",
+      description: `- Membuat syntax pemrograman sederhana untuk mendukung kebutuhan IT operasional.
+- Membuat dan mendesain dashboard dari data report untuk visualisasi data internal.
+- Mempelajari teknologi IT baru dan membantu pemeliharaan sistem pendukung.`,
     },
-     {
+    {
       id: "exp2",
-      company: "Inovasi Web Kreatif",
-      role: "Frontend Developer",
-      date: "Jun 2017 - Des 2019",
-      description: `- Mengembangkan dan memelihara berbagai situs web klien menggunakan React dan Vue.js.
-- Meningkatkan performa situs web hingga 20% melalui optimisasi kode dan teknik lazy loading.`,
+      company: "ISOmedik",
+      role: "Finance Reconcile Staff",
+      date: "Okt 2025 - Feb 2026",
+      description: `- Melakukan rekonsiliasi data rumah sakit (RS) dengan data transaksi internal perusahaan.
+- Mengidentifikasi selisih data dan memastikan keselarasan laporan keuangan medis.`,
+    },
+    {
+      id: "exp3",
+      company: "ISOmedik",
+      role: "Administration Staff",
+      date: "Nov 2023 - Okt 2025",
+      description: `- Mengelola proses klaim peserta mulai dari input data awal, pemindaian dokumen, hingga penyimpanan data.
+- Menjaga ketertiban administrasi dan integritas berkas data klaim masuk.`,
     },
   ],
   education: [
@@ -49,5 +57,5 @@ export const initialData: ResumeData = {
       link: 'github.com/faaadelmr/cv-lization'
     }
   ],
-  skills: "React, Next.js, TypeScript, Tailwind CSS, JavaScript, Laravel",
+  skills: "SQL, Python, JavaScript, AI-Assisted Development (Cursor/ChatGPT), Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim, Analytical Thinking",
 };

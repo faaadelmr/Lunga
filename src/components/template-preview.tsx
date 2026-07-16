@@ -11,7 +11,6 @@ import { SmartStartTemplatePreview } from '@/components/templates/smart-start-te
 import { VektoristikTemplatePreview } from '@/components/templates/vektoristik-template';
 import { AwesomeTemplatePreview } from '@/components/templates/awesome-template';
 import { CooperTemplatePreview } from '@/components/templates/cooper-template';
-import { QuateTemplatePreview } from '@/components/templates/quate-template';
 import { DiamondTemplatePreview } from '@/components/templates/diamond-template';
 import { HexagonvyTemplatePreview } from '@/components/templates/hexagonvy-template';
 import { StarlightTemplatePreview } from '@/components/templates/starlight-template';
@@ -68,7 +67,6 @@ export const TemplatePreviewComponent = ({
     starlight: StarlightTemplatePreview,
     hexagonvy: HexagonvyTemplatePreview,
     diamond: DiamondTemplatePreview,
-    quate: QuateTemplatePreview,
     cooper: CooperTemplatePreview,
     awesome: AwesomeTemplatePreview,
     vektoristik: VektoristikTemplatePreview,

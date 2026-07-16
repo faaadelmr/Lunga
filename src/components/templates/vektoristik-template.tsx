@@ -70,7 +70,7 @@ export const VektoristikTemplatePreview = ({ data, color, bgColor, textColor, fo
                 <div className="relative h-40">
                     {/* The colored bar */}
                     <div className="absolute top-0 left-0 right-0 h-28" style={{ backgroundColor: color }}>
-                        <div className="flex items-center h-full pl-52" style={{ color: headerTextColor }}>
+                        <div className={`flex items-center h-full ${data.personal.photo ? 'pl-52' : 'pl-8'}`} style={{ color: headerTextColor }}>
                             <div>
                                 <h1 className="text-4xl font-bold uppercase">{data.personal.name}</h1>
                                 <p className="text-xl font-light tracking-wider">{data.personal.role}</p>

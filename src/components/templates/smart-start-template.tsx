@@ -40,8 +40,8 @@ export const SmartStartTemplatePreview = ({ data, color, bgColor, textColor, fon
     return (
         <div className="flex h-full" style={fontStyle}>
             {/* Left Column (Sidebar) */}
-            <aside className="w-1/3 p-8 flex flex-col gap-8 relative overflow-hidden" style={sidebarBgStyle}>
-                <div className="absolute top-8 -right-8">
+            <aside className="w-1/3 p-8 flex flex-col gap-8 relative z-10" style={sidebarBgStyle}>
+                <div className="absolute top-8 -right-8 z-20">
                     {data.personal.photo ? (
                         <div className="bg-white p-2 shadow-lg">
                             <div className="relative w-48 h-56 border-8 border-white">

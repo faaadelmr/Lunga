@@ -24,14 +24,25 @@ export default function RenderPdfLayout({
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          *::-webkit-scrollbar {
+            display: none !important;
+          }
+          * {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
           }
           body {
             margin: 0;
             padding: 0;
             background: white;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
           @page {
-            size: A4;
+            size: 840px 1188px;
             margin: 0;
           }
         `}</style>

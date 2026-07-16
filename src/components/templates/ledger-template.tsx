@@ -24,12 +24,11 @@ export const LedgerTemplatePreview = ({ data, color, bgColor, textColor, font, l
             {/* Header */}
             <header className="flex justify-between items-center mb-6">
                 {data.personal.photo && (
-                    <div className="w-40 h-24 relative overflow-hidden shadow-md flex-shrink-0 border-2" style={{ borderColor: color }}>
+                    <div className="w-24 h-24 relative overflow-hidden shadow-md flex-shrink-0 border-2" style={{ borderColor: color }}>
                         <Image
                             src={data.personal.photo}
                             alt={data.personal.name}
-                            width={160}
-                            height={96}
+                            fill
                             className="object-cover"
                         />
                     </div>
