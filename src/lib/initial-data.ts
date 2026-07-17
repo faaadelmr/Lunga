@@ -6,10 +6,10 @@ export const initialData: ResumeData = {
     name: "Fadel Muhamad Rifai",
     role: "Web Developer",
     email: "faaadelmr@gmail.com",
-    phone: "0812-3456-7890",
+    phone: "085156630686",
     location: "Tangerang, Indonesia",
-    website: "faaadelmr.pages.dev",
-    photo: "",
+    website: "faaadelmr.dev",
+    photo: "https://media.licdn.com/dms/image/v2/D5603AQE3XjaZj8ufbA/profile-displayphoto-scale_400_400/B56Z9trFHsIoAk-/0/1784251438404?e=1785974400&v=beta&t=WgSmm-FAVQUiRAwMVa9X-IoRfMF_7pyEWk1HWOhWwg4",
     description: "Manusia yang entusias dengan website, game, pc dan teknologi lainnya. I use ai btw, suka mempelajari teknologi baru serta membuat sesuatu yang mempermudah pekerjaan ataupun kegiatan yang saya lakukan",
   },
   experience: [
@@ -19,13 +19,13 @@ export const initialData: ResumeData = {
       role: "IT Junior",
       date: "Feb 2026 - Sekarang",
       description: `- Membuat syntax pemrograman sederhana untuk mendukung kebutuhan IT operasional.
-- Membuat dan mendesain dashboard dari data report untuk visualisasi data internal.
+- Membuat dan membuat dashboard dari data report untuk visualisasi data internal.
 - Mempelajari teknologi IT baru dan membantu pemeliharaan sistem pendukung.`,
     },
     {
       id: "exp2",
       company: "ISOmedik",
-      role: "Finance Reconcile Staff",
+      role: "Finance Reconcile",
       date: "Okt 2025 - Feb 2026",
       description: `- Melakukan rekonsiliasi data rumah sakit (RS) dengan data transaksi internal perusahaan.
 - Mengidentifikasi selisih data dan memastikan keselarasan laporan keuangan medis.`,
@@ -33,7 +33,7 @@ export const initialData: ResumeData = {
     {
       id: "exp3",
       company: "ISOmedik",
-      role: "Administration Staff",
+      role: "Administration Claim",
       date: "Nov 2023 - Okt 2025",
       description: `- Mengelola proses klaim peserta mulai dari input data awal, pemindaian dokumen, hingga penyimpanan data.
 - Menjaga ketertiban administrasi dan integritas berkas data klaim masuk.`,
@@ -57,5 +57,5 @@ export const initialData: ResumeData = {
       link: 'github.com/faaadelmr/cv-lization'
     }
   ],
-  skills: "SQL, Python, JavaScript, AI-Assisted Development (Cursor/ChatGPT), Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim, Analytical Thinking",
+  skills: "SQL, JavaScript, AI-assisted Coding, Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim",
 };

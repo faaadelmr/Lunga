@@ -190,7 +190,7 @@ export function ResumePreviewPanel() {
   const fontClass = `font-${selectedFont.toLowerCase().replace(' ', '-')}`;
 
   return (
-    <div className="h-screen bg-secondary flex flex-col items-center justify-start p-4 md:p-8 overflow-auto">
+    <div className="h-full min-h-0 bg-secondary flex flex-col items-center justify-start p-4 md:p-8 overflow-auto">
       <div className="w-full max-w-4xl flex justify-end mb-4 flex-shrink-0">
         {isClient ? (
           <Button onClick={handleDownload} disabled={loading} className="flex items-center gap-2 px-4 py-2">

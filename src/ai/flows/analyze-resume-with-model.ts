@@ -3,9 +3,10 @@
  * @fileOverview Function to analyze a resume image or PDF text with a specific model and extract structured data.
  */
 
-import { ai } from '@/ai/genkit';
+import { ai, type AiModel } from '@/ai/genkit';
 import { getGeminiModel } from '@/ai/genkit';
 import { z } from 'zod';
+import { parsePdfToText } from '@/lib/pdf-parser';
 
 const PersonalInfoSchema = z.object({
   name: z.string().describe('The full name of the person.'),
@@ -51,7 +52,7 @@ type AnalyzeResumeOutput = z.infer<typeof AnalyzeResumeOutputSchema>;
 
 interface AnalyzeResumeInput {
   photoDataUri: string;
-  model: 'gemini-2.5-flash' | 'gemini-2.0-flash' | 'gemini-2.0-flash-lite' | 'gemini-1.5-pro';
+  model: AiModel;
 }
 
 export async function analyzeResumeWithModel(input: AnalyzeResumeInput): Promise<AnalyzeResumeOutput> {
@@ -60,13 +61,32 @@ export async function analyzeResumeWithModel(input: AnalyzeResumeInput): Promise
   // Get the selected model
   const selectedModel = getGeminiModel(model);
 
-  // Create a prompt with the specific model
-  const prompt = ai.definePrompt({
-    name: 'analyzeResumePromptWithModel',
-    input: { schema: z.object({ photoDataUri: z.string() }) },
-    output: { schema: AnalyzeResumeOutputSchema },
+  // Check if file is PDF
+  const isPdf = photoDataUri.startsWith('data:application/pdf');
+  let pdfText = '';
+
+  if (isPdf) {
+    try {
+      pdfText = await parsePdfToText(photoDataUri);
+      console.log('\n================================================================');
+      console.log('⚡ [BUKTI KONVERSI PDF KE TEKS/MARKDOWN]');
+      console.log('Tuan, PDF telah berhasil dikonversi secara lokal ke teks.');
+      console.log(`Panjang teks yang diekstrak: ${pdfText.length} karakter.`);
+      console.log('----------------------------------------------------------------');
+      console.log('Pratinjau 300 karakter pertama teks hasil konversi:');
+      console.log(pdfText.substring(0, 300) + '...');
+      console.log('================================================================\n');
+    } catch (err) {
+      console.error('PDF text extraction failed, falling back to multimodal:', err);
+    }
+  }
+
+  // Generate structured output using Genkit generate API
+  const response = await ai.generate({
     model: selectedModel,
-    prompt: `You are an expert resume parser. Analyze the provided resume content (which can be from an image or extracted text from a PDF) and extract the information into a structured JSON format.
+    output: { schema: AnalyzeResumeOutputSchema },
+    prompt: pdfText
+      ? `You are an expert resume parser. Analyze the provided resume text extracted from a PDF and extract the information into a structured JSON format.
 
 Extract the following sections:
 - Personal Details (name, role, email, phone, location, website, and a professional summary/objective as description)
@@ -77,12 +97,30 @@ Extract the following sections:
 
 Pay close attention to formatting the extracted text correctly, especially for descriptions which may contain bullet points. Maintain the original language of the resume. If a section like 'Projects' is not found, return an empty array for it.
 
-Resume Content:
-{{media url=photoDataUri}}
-`,
+Resume Text Content:
+${pdfText}`
+      : [
+          {
+            text: `You are an expert resume parser. Analyze the provided resume image and extract the information into a structured JSON format.
+
+Extract the following sections:
+- Personal Details (name, role, email, phone, location, website, and a professional summary/objective as description)
+- Work Experience (company, role, dates, description)
+- Education (institution, degree, dates, description)
+- Projects (name, description, technologies used, and a link)
+- Skills (as a single comma-separated string)
+
+Pay close attention to formatting the extracted text correctly, especially for descriptions which may contain bullet points. Maintain the original language of the resume. If a section like 'Projects' is not found, return an empty array for it.`
+          },
+          {
+            media: {
+              url: photoDataUri
+            }
+          }
+        ]
   });
 
-  const { output } = await prompt({ photoDataUri });
+  const output = response.output;
 
   if (!output) {
     throw new Error('Failed to get a structured response from the AI.');

@@ -54,8 +54,8 @@ export interface ResumeContextProps {
   setSelectedFont: React.Dispatch<React.SetStateAction<Font>>;
   selectedLanguage: Language;
   setSelectedLanguage: React.Dispatch<React.SetStateAction<Language>>;
-  selectedAiModel: 'gemini-3-flash-preview' | 'gemini-3-pro-preview' | 'gemini-2.5-pro' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | 'gemini-2.0-flash' | 'gemini-2.0-flash-lite' | 'gemini-1.5-flash';
-  setSelectedAiModel: React.Dispatch<React.SetStateAction<'gemini-3-flash-preview' | 'gemini-3-pro-preview' | 'gemini-2.5-pro' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | 'gemini-2.0-flash' | 'gemini-2.0-flash-lite' | 'gemini-1.5-flash'>>;
+  selectedAiModel: 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | 'gemini-3-flash-preview' | 'gemini-3.1-pro-preview' | 'gemini-pro-latest' | 'gemini-flash-latest' | 'gemini-flash-lite-latest';
+  setSelectedAiModel: React.Dispatch<React.SetStateAction<'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | 'gemini-3-flash-preview' | 'gemini-3.1-pro-preview' | 'gemini-pro-latest' | 'gemini-flash-latest' | 'gemini-flash-lite-latest'>>;
   handleAnalyzeResume: (photoDataUri: string) => Promise<void>;
   isAiLoading: boolean;
 }

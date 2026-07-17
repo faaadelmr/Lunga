@@ -103,34 +103,29 @@ export function AiAssistPanel() {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-2">
-          <Label htmlFor="ai-model-select">Select AI Model (Free via Puter.js)</Label>
+          <Label htmlFor="ai-model-select">Select AI Model (via Gemini AI Genkit)</Label>
           <Select value={selectedAiModel} onValueChange={(value) => setSelectedAiModel(value as any)}>
             <SelectTrigger id="ai-model-select">
               <SelectValue placeholder="Select AI model" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="gemini-3-flash-preview">🚀 Gemini 3 Flash (Latest)</SelectItem>
-              <SelectItem value="gemini-3-pro-preview">🧠 Gemini 3 Pro (Most Capable)</SelectItem>
-              <SelectItem value="gemini-2.5-pro">⭐ Gemini 2.5 Pro (High Quality)</SelectItem>
-              <SelectItem value="gemini-2.5-flash">⚡ Gemini 2.5 Flash (Fast)</SelectItem>
-              <SelectItem value="gemini-2.5-flash-lite">💨 Gemini 2.5 Flash Lite</SelectItem>
-              <SelectItem value="gemini-2.0-flash">🎯 Gemini 2.0 Flash (Stable)</SelectItem>
-              <SelectItem value="gemini-2.0-flash-lite">🪶 Gemini 2.0 Flash Lite</SelectItem>
-              <SelectItem value="gemini-1.5-flash">📋 Gemini 1.5 Flash (Legacy)</SelectItem>
+              <SelectItem value="gemini-3.5-flash">⚡ Gemini 3.5 Flash</SelectItem>
+              <SelectItem value="gemini-3.1-flash-lite">🪶 Gemini 3.1 Flash Lite</SelectItem>
+              <SelectItem value="gemini-3-flash-preview">🚀 Gemini 3 Flash Preview</SelectItem>
+              <SelectItem value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</SelectItem>
+              <SelectItem value="gemini-pro-latest">⭐ Gemini Pro Latest</SelectItem>
+              <SelectItem value="gemini-flash-latest">🎯 Gemini Flash Latest</SelectItem>
+              <SelectItem value="gemini-flash-lite-latest">💨 Gemini Flash-Lite Latest</SelectItem>
             </SelectContent>
           </Select>
           <p className="text-xs text-muted-foreground">
-            {selectedAiModel === 'gemini-3-pro-preview'
-              ? '🧠 Most capable model - best for complex documents'
-              : selectedAiModel === 'gemini-3-flash-preview'
-                ? '🚀 Latest & fastest Gemini 3 model'
-                : selectedAiModel === 'gemini-2.5-pro'
-                  ? '⭐ High quality results with good speed'
-                  : selectedAiModel.includes('lite')
-                    ? '🪶 Lightweight - fastest response time'
-                    : '⚡ Balanced speed and accuracy'}
+            {selectedAiModel.includes('pro')
+              ? '🧠 Capable model - best for complex layouts and reasoning'
+              : selectedAiModel.includes('lite')
+                ? '🪶 Lightweight - faster response time'
+                : '⚡ Fast and balanced performance'}
           </p>
-          <p className="text-xs text-green-600 dark:text-green-400">✅ Free & Unlimited via Puter.js</p>
+          <p className="text-xs text-green-600 dark:text-green-400">Powered by Gemini AI Genkit</p>
         </div>
 
         <div className="space-y-2">

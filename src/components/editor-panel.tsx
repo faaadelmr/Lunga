@@ -8,7 +8,7 @@ import { FileText, Palette, Wand2 } from "lucide-react";
 
 export function EditorPanel() {
   return (
-    <div className="flex flex-col h-screen bg-card border-r shadow-lg xl:shadow-none">
+    <div className="flex flex-col h-full min-h-0 bg-card border-r shadow-lg xl:shadow-none">
       <header className="p-6 border-b">
         <h1 className="text-2xl font-headline font-bold text-primary">CV-lization</h1>
         <p className="text-sm text-muted-foreground">#CobaAjaDulu</p>
