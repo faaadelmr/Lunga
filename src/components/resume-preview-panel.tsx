@@ -14,6 +14,7 @@ import { ProfessionalTemplatePreview } from "./templates/professional-template";
 import { TimelineTemplatePreview } from "./templates/timeline-template";
 import { Skeleton } from "./ui/skeleton";
 import { cn } from "@/lib/utils";
+import { GoogleFontLoader } from "./google-font-loader";
 import { SmartStartTemplatePreview } from "./templates/smart-start-template";
 import { VektoristikTemplatePreview } from "./templates/vektoristik-template";
 import { AwesomeTemplatePreview } from "./templates/awesome-template";
@@ -241,6 +242,7 @@ export function ResumePreviewPanel() {
                 className="w-[840px] h-[1188px] transform origin-top-left transition-transform duration-300"
                 style={{ transform: `scale(${scale})` }}
               >
+                <GoogleFontLoader font={selectedFont} />
                 <TemplatePreview
                   data={resumeData}
                   color={selectedColor}

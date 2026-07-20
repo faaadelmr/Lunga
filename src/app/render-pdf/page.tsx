@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import { TemplatePreviewComponent } from '@/components/template-preview';
+import { GoogleFontLoader } from '@/components/google-font-loader';
 import type { Font, Language } from '@/lib/types';
 
 function RenderContent() {
@@ -73,6 +74,7 @@ function RenderContent() {
                 overflow: 'hidden',
             }}
         >
+            <GoogleFontLoader font={templateData.font} />
             <TemplatePreviewComponent
                 data={templateData.data}
                 template={templateData.template}

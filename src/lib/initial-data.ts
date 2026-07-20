@@ -51,11 +51,18 @@ export const initialData: ResumeData = {
   projects: [
     {
       id: 'proj1',
-      name: 'Aplikasi Resume Builder',
-      description: 'Aplikasi web untuk membuat dan mendesain CV secara real-time dengan bantuan AI.',
-      technologies: 'Next.js, TypeScript, Tailwind CSS, Genkit AI',
-      link: 'github.com/faaadelmr/cv-lization'
+      name: 'PDF-adel',
+      description: 'Cybernetic PDF toolkit. PDF manipulasi berbasis web untuk memotong, menggabungkan, memutar, menghapus, dan mengatur halaman PDF secara instan langsung di browser tanpa server upload, full local.',
+      technologies: 'HTML, JavaScript, Tailwind CSS, PDF-lib',
+      link: 'github.com/faaadelmr/pdf-adel'
+    },
+    {
+      id: 'proj2',
+      name: 'BabynumTime',
+      description: 'Web app tracker tumbuh kembang bayi untuk mencatat waktu menyusui/minum, penggantian popok, volume ASI ibu, waktu pompa ASI (pumping), serta dilengkapi dengan analisis AI untuk mendeteksi kesehatan BAB bayi.',
+      technologies: 'React, Next.js, TypeScript, Tailwind CSS',
+      link: 'github.com/faaadelmr/BabynumTime'
     }
   ],
-  skills: "SQL, JavaScript, AI-assisted Coding, Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim",
+  skills: "SQL, VB.Net, AI-assisted Coding, Dashboard & Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim",
 };

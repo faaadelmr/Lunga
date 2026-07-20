@@ -32,6 +32,7 @@ import { GitFolioTemplatePreview } from "../templates/git-folio-template";
 import { GlassmorphismTemplatePreview } from "../templates/glassmorphism-template";
 import { DeveloperCliTemplatePreview } from "../templates/developer-cli-template";
 import { NeoBrutalistTemplatePreview } from "../templates/neo-brutalist-template";
+import { GoogleFontLoader } from "../google-font-loader";
 
 const templates: { id: Template, name: string, component: React.FC<any> }[] = [
   { id: 'glassmorphism', name: 'Glassmorphism', component: GlassmorphismTemplatePreview },
@@ -233,6 +234,7 @@ const TemplateCard = ({
 
 export function StylePanel() {
   const { resumeData, selectedTemplate, setSelectedTemplate, selectedColor, setSelectedColor, selectedFont, setSelectedFont, selectedBgColor, setSelectedBgColor, selectedTextColor, setSelectedTextColor, selectedLanguage, setSelectedLanguage } = useResume();
+  const [isFontValid, setIsFontValid] = useState(true);
 
   return (
     <div className="space-y-8">
@@ -256,20 +258,51 @@ export function StylePanel() {
       />
       <div>
         <h3 className="text-xl font-headline mb-4">Font</h3>
-        <div className="space-y-2">
-          <Label htmlFor="font-select">Select a font family</Label>
-          <Select value={selectedFont} onValueChange={(value) => setSelectedFont(value as Font)}>
-            <SelectTrigger id="font-select">
-              <SelectValue placeholder="Select font" />
-            </SelectTrigger>
-            <SelectContent>
-              {fonts.map(font => (
-                <SelectItem key={font.id} value={font.id} style={{ fontFamily: font.id }}>
-                  {font.name}
+        <GoogleFontLoader font={selectedFont} onValidation={setIsFontValid} />
+        <div className="space-y-3">
+          <div>
+            <Label htmlFor="font-select">Select a preset font family</Label>
+            <Select value={fonts.some(f => f.id === selectedFont) ? selectedFont : "custom-font"} onValueChange={(value) => {
+              if (value === "custom-font") {
+                setSelectedFont("Poppins");
+              } else {
+                setSelectedFont(value);
+              }
+            }}>
+              <SelectTrigger id="font-select" className="mt-1">
+                <SelectValue placeholder="Select font" />
+              </SelectTrigger>
+              <SelectContent>
+                {fonts.map(font => (
+                  <SelectItem key={font.id} value={font.id} style={{ fontFamily: font.id }}>
+                    {font.name}
+                  </SelectItem>
+                ))}
+                <SelectItem value="custom-font" className="font-semibold italic">
+                  Custom Font...
                 </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              </SelectContent>
+            </Select>
+          </div>
+          {!fonts.some(f => f.id === selectedFont) && (
+            <div>
+              <div className="flex justify-between items-center">
+                <Label htmlFor="custom-font-input">Paste custom Google Font name</Label>
+                {!isFontValid && (
+                  <span className="text-xs text-destructive font-medium flex items-center gap-1 animate-pulse">
+                    ⚠️ Font tidak ditemukan
+                  </span>
+                )}
+              </div>
+              <Input 
+                id="custom-font-input"
+                placeholder="e.g. Poppins, Plus Jakarta Sans, Lora"
+                value={selectedFont}
+                onChange={(e) => setSelectedFont(e.target.value)}
+                className={cn("mt-1", !isFontValid && "border-destructive focus-visible:ring-destructive")}
+              />
+            </div>
+          )}
         </div>
       </div>
       <div>

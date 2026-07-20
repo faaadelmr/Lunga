@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Globe, Star, Code, Briefcase, GraduationCap, User 
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 export const ElegantTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
   const accentColorStyle = { color: color };
@@ -71,9 +72,15 @@ export const ElegantTemplatePreview = ({ data, color, bgColor, textColor, font, 
                     </div>
                     <h4 className="font-semibold text-xs" style={{ ...fontStyle, ...lightTextStyle, opacity: 0.9 }}>{exp.company}</h4>
                     <div className="text-xs leading-relaxed" style={lightTextStyle}>
-                      {exp.description.split('\n').map((line, i) => (
-                        <div key={i}>{line}</div>
-                      ))}
+                      {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                     </div>
                   </div>
                 ))}
@@ -112,7 +119,7 @@ export const ElegantTemplatePreview = ({ data, color, bgColor, textColor, font, 
               </h2>
               <ul className="space-y-1">
                 {(data.skills || '').split(',').map(skill => skill.trim()).filter(Boolean).map(skill => (
-                  <li key={skill} className="text-xs" style={lightTextStyle}>
+                  <li key={skill} className={themeStandards.typography.body} style={lightTextStyle}>
                     {skill}
                   </li>
                 ))}

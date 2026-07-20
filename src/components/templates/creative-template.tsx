@@ -5,6 +5,7 @@ import { Mail, Phone, Globe, User, Briefcase, GraduationCap, Star, Heart, MapPin
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 // Helper function to determine if a color is light or dark
 const isColorLight = (hexColor: string) => {
@@ -134,8 +135,14 @@ export const CreativeTemplatePreview = ({ data, color, bgColor, textColor, font,
                   <span className="text-gray-500 font-mono">{exp.date}</span>
                 </div>
                 <div className="text-xs prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
-                  {exp.description.split('\n').map((line, i) => (
-                    <div key={i}>{line}</div>
+                  {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
                   ))}
                 </div>
               </div>

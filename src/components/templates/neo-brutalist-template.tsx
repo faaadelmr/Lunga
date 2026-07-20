@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Globe, Briefcase, GraduationCap, Wrench, Code, Use
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 export const NeoBrutalistTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
   const fontStyle = { fontFamily: font };
@@ -83,11 +84,17 @@ export const NeoBrutalistTemplatePreview = ({ data, color, bgColor, textColor, f
                         <h3 className="font-extrabold text-sm">{exp.role}</h3>
                         <span className="text-xs font-black bg-gray-100 border-2 border-black px-1.5 py-0.5 shadow-[1px_1px_0px_0px_#000]">{exp.date}</span>
                       </div>
-                      <div className="text-xs font-bold" style={{ color }}>{exp.company}</div>
+                      <div className={themeStandards.typography.body} style={{ color }}>{exp.company}</div>
                       <div className="text-xs font-semibold leading-relaxed text-gray-800">
-                        {exp.description.split('\n').map((line, i) => (
-                          <div key={i}>{line}</div>
-                        ))}
+                        {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                       </div>
                     </div>
                   ))}

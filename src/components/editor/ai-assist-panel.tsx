@@ -113,11 +113,6 @@ export function AiAssistPanel() {
               <SelectItem value="gemini-3.5-flash">⚡ Gemini 3.5 Flash</SelectItem>
             </SelectContent>
           </Select>
-          <p className="text-xs text-muted-foreground">
-            {selectedAiModel === 'gemini-flash-lite-latest'
-              ? '🪶 Lightweight - faster response time, highly recommended for PDF'
-              : '⚡ Powerful - better accuracy for images & complex layouts'}
-          </p>
           <p className="text-xs text-green-600 dark:text-green-400">Powered by Gemini AI Genkit</p>
         </div>
 

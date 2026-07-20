@@ -5,8 +5,8 @@ import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
 
 const Section = ({ title, children }: { title: string, children: React.ReactNode }) => (
-  <section className="mb-6">
-    <h2 className="text-lg font-bold uppercase tracking-wider border-b-2 pb-1 mb-3">{title}</h2>
+  <section className="mb-4">
+    <h2 className="text-sm font-bold uppercase tracking-wider border-b-2 pb-0.5 mb-2">{title}</h2>
     {children}
   </section>
 );
@@ -21,10 +21,10 @@ export const AtsFriendlyTemplatePreview = ({ data, color, bgColor, textColor, fo
   return (
     <div className="p-8 h-full overflow-hidden" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
       {/* Header */}
-      <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold">{data.personal.name}</h1>
-        <p className="text-md mt-1">{data.personal.role}</p>
-        <div className="flex justify-center items-center gap-x-4 text-sm mt-2" style={lightTextStyle}>
+      <header className="text-center mb-5">
+        <h1 className="text-2xl font-bold">{data.personal.name}</h1>
+        <p className="text-sm mt-0.5">{data.personal.role}</p>
+        <div className="flex justify-center items-center gap-x-3 text-xs mt-1.5" style={lightTextStyle}>
           <span>{data.personal.location}</span>
           <span>&bull;</span>
           <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="hover:underline">{data.personal.phone}</a>
@@ -42,14 +42,14 @@ export const AtsFriendlyTemplatePreview = ({ data, color, bgColor, textColor, fo
       {/* Profile / Summary */}
       {data.personal.description && (
         <Section title={t(language, 'summary')}>
-          <p className="text-sm whitespace-pre-line mt-2 text-justify" style={lightTextStyle}>{data.personal.description}</p>
+          <p className="text-xs whitespace-pre-line mt-1 text-justify" style={lightTextStyle}>{data.personal.description}</p>
         </Section>
       )}
 
       {/* Skills */}
       {data.skills && (
         <Section title={t(language, 'skills')}>
-          <p className="text-sm whitespace-pre-line mt-2" style={lightTextStyle}>{data.skills}</p>
+          <p className="text-xs whitespace-pre-line mt-1" style={lightTextStyle}>{data.skills}</p>
         </Section>
       )}
 
@@ -57,16 +57,22 @@ export const AtsFriendlyTemplatePreview = ({ data, color, bgColor, textColor, fo
       {data.experience && data.experience.length > 0 && (
         <Section title={t(language, 'experience')}>
           {data.experience.map(exp => (
-            <div key={exp.id} className="mb-4">
+            <div key={exp.id} className="mb-3">
               <div className="flex justify-between items-baseline">
-                <h3 className="text-lg font-bold">{exp.company}</h3>
-                <p className="text-sm font-mono" style={lightTextStyle}>{exp.date}</p>
+                <h3 className="text-sm font-bold">{exp.company}</h3>
+                <p className="text-xs font-mono" style={lightTextStyle}>{exp.date}</p>
               </div>
-              <p className="font-semibold italic">{exp.role}</p>
-              <div className="text-sm text-justify mt-1" style={lightTextStyle}>
-                {exp.description.split('\n').map((line, i) => (
-                  <div key={i}>{line}</div>
-                ))}
+              <p className="text-xs font-semibold italic">{exp.role}</p>
+              <div className="text-xs text-justify mt-0.5 space-y-1" style={lightTextStyle}>
+                {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
               </div>
             </div>
           ))}
@@ -77,17 +83,17 @@ export const AtsFriendlyTemplatePreview = ({ data, color, bgColor, textColor, fo
       {data.projects && data.projects.length > 0 && (
         <Section title={t(language, 'projects')}>
           {data.projects.map(proj => (
-            <div key={proj.id} className="mb-4">
-              <div>
-                <h3 className="text-lg font-bold">{proj.name}</h3>
+            <div key={proj.id} className="mb-3">
+              <div className="flex justify-between items-baseline">
+                <h3 className="text-sm font-bold">{proj.name}</h3>
                 {proj.link && (
-                  <div className="text-sm mt-1" style={lightTextStyle}>
-                    Link: <a href={proj.link} target="_blank" rel="noopener noreferrer" className="hover:underline break-all" style={linkStyle}>{proj.link}</a>
+                  <div className="text-xs" style={lightTextStyle}>
+                    <a href={getWebsiteLink(proj.link)} target="_blank" rel="noopener noreferrer" className="hover:underline break-all" style={linkStyle}>Link</a>
                   </div>
                 )}
               </div>
-              <p className="font-semibold italic text-sm" style={lightTextStyle}>Technologies: {proj.technologies}</p>
-              <div className="text-sm whitespace-pre-line text-justify mt-1" style={lightTextStyle}>{proj.description}</div>
+              <p className="font-semibold italic text-xs" style={lightTextStyle}>Technologies: {proj.technologies}</p>
+              {proj.description && <div className="text-xs text-justify mt-0.5" style={lightTextStyle}>{proj.description}</div>}
             </div>
           ))}
         </Section>
@@ -97,13 +103,13 @@ export const AtsFriendlyTemplatePreview = ({ data, color, bgColor, textColor, fo
       {data.education && data.education.length > 0 && (
         <Section title={t(language, 'education')}>
           {data.education.map(edu => (
-            <div key={edu.id} className="mb-4">
+            <div key={edu.id} className="mb-2">
               <div className="flex justify-between items-baseline">
-                <h3 className="text-lg font-bold">{edu.institution}</h3>
-                <p className="text-sm font-mono" style={lightTextStyle}>{edu.date}</p>
+                <h3 className="text-sm font-bold">{edu.institution}</h3>
+                <p className="text-xs font-mono" style={lightTextStyle}>{edu.date}</p>
               </div>
-              <p className="font-semibold italic">{edu.degree}</p>
-              <p className="text-sm whitespace-pre-line mt-1 text-justify" style={lightTextStyle}>{edu.description}</p>
+              <p className="text-xs italic" style={lightTextStyle}>{edu.degree}</p>
+              {edu.description && <p className="text-xs mt-0.5 text-justify" style={lightTextStyle}>{edu.description}</p>}
             </div>
           ))}
         </Section>

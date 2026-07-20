@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Globe, User, Code } from 'lucide-react';
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 export const SwissTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
   const accentColor = { color: color };
@@ -97,9 +98,15 @@ export const SwissTemplatePreview = ({ data, color, bgColor, textColor, font, la
                     </div>
                     <h4 className="font-semibold text-xs" style={{ ...fontStyle, color }}>{exp.company}</h4>
                     <div className="text-xs leading-relaxed" style={lightTextStyle}>
-                      {exp.description.split('\n').map((line, i) => (
-                        <div key={i}>{line}</div>
-                      ))}
+                      {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                     </div>
                   </div>
                 ))}

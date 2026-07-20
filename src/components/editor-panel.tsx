@@ -11,7 +11,7 @@ export function EditorPanel() {
     <div className="flex flex-col h-full min-h-0 bg-card border-r shadow-lg xl:shadow-none">
       <header className="p-6 border-b">
         <h1 className="text-2xl font-headline font-bold text-primary">CV-lization</h1>
-        <p className="text-sm text-muted-foreground">#CobaAjaDulu</p>
+        <p className="text-sm text-muted-foreground">#cobaajadulu</p>
       </header>
       <Tabs defaultValue="ai-assist" className="flex-1 flex flex-col overflow-hidden">
         <div className="px-6 py-4 border-b">

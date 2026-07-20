@@ -15,10 +15,21 @@ const TimelineItem = ({ date, title, description, color, textColor }: { date: st
         <div className="w-full -mt-1">
             <p className="font-bold text-sm" style={{ color }}>{date}</p>
             <h3 className="font-bold text-lg" style={{ color: textColor }}>{title}</h3>
-            <div className="text-sm prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
-                {description.split('\n').map((line, i) => (
-                    <div key={i}>{line}</div>
-                ))}
+            <div className="text-sm prose max-w-none space-y-1" style={{ color: textColor, opacity: 0.8 }}>
+                {description.split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0)
+                    .map((line, i) => {
+                        if (i === 0) {
+                            return <div key={i} className="font-semibold mb-1">{line}</div>;
+                        }
+                        return (
+                            <div key={i} className="flex items-start gap-1.5 ml-1">
+                                <span className="flex-shrink-0 select-none">•</span>
+                                <span className="flex-grow w-0">{line.replace(/^[-*•]\s*/, '')}</span>
+                            </div>
+                        );
+                    })}
             </div>
         </div>
     </div>

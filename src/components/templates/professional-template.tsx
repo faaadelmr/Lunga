@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 export const ProfessionalTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
   const fontStyle = { fontFamily: font };
@@ -61,9 +62,15 @@ export const ProfessionalTemplatePreview = ({ data, color, bgColor, textColor, f
                   </div>
                   <h4 className="font-semibold mb-2" style={{ ...fontStyle, fontSize: '1rem', ...lightTextStyle, opacity: 0.9 }}>{exp.company}</h4>
                   <div className="text-sm prose max-w-none prose-sm" style={lightTextStyle}>
-                    {exp.description.split('\n').map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
+                    {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                   </div>
                 </div>
               ))}

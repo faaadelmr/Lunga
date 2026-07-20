@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Globe, Calculator, PenLine, FileText, Briefcase, G
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 const SectionHeader = ({ title, color, textColor, icon }: { title: string, color: string, textColor: string, icon: React.ReactNode }) => (
     <div className="flex items-center gap-3 mb-4 pb-2 border-b-2" style={{ borderColor: color }}>
@@ -92,9 +93,15 @@ export const LedgerTemplatePreview = ({ data, color, bgColor, textColor, font, l
                                         </div>
                                         <h4 className="font-semibold text-sm mb-1" style={{ color }}>{exp.company}</h4>
                                         <div className="prose max-w-none text-xs" style={lightTextStyle}>
-                                            {exp.description.split('\n').map((line, i) => (
-                                                <div key={i}>{line}</div>
-                                            ))}
+                                            {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                                         </div>
                                     </div>
                                 ))}

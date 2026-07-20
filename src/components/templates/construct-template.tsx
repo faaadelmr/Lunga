@@ -7,11 +7,11 @@ import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
 
 const SectionHeader = ({ title, color, textColor, icon }: { title: string, color: string, textColor: string, icon: React.ReactNode }) => (
-    <div className="flex items-center gap-3 mb-4">
-        <div className="w-8 h-8 flex items-center justify-center rounded-sm" style={{ backgroundColor: color }}>
+    <div className="flex items-center gap-2 mb-2">
+        <div className="w-6 h-6 flex items-center justify-center rounded-sm" style={{ backgroundColor: color }}>
             {icon}
         </div>
-        <h2 className="text-xl font-bold uppercase tracking-wider" style={{ color: textColor }}>{title}</h2>
+        <h2 className="text-sm font-bold uppercase tracking-wider" style={{ color: textColor }}>{title}</h2>
     </div>
 );
 
@@ -39,43 +39,43 @@ export const ConstructTemplatePreview = ({ data, color, bgColor, textColor, font
     const lightTextStyle = { color: textColor, opacity: 0.8 };
 
     return (
-        <div className="relative h-full overflow-hidden p-8" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
+        <div className="relative h-full overflow-hidden p-6" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
             {/* Header with Caution Tape effect */}
-            <header className="relative flex items-center justify-between gap-6 mb-8 p-4 z-10" style={{ border: `3px solid ${color} ` }}>
+            <header className="relative flex items-center justify-between gap-4 mb-4 p-3 z-10" style={{ border: `2px solid ${color} ` }}>
                 <CautionTapePattern color={color} />
                 <div className='relative flex-grow w-0'>
-                    <h1 className="text-4xl font-bold uppercase" style={{ color: color }}>{data.personal.name}</h1>
-                    <p className="text-lg font-semibold">{data.personal.role}</p>
+                    <h1 className="text-2xl font-bold uppercase" style={{ color: color }}>{data.personal.name}</h1>
+                    <p className="text-sm font-semibold">{data.personal.role}</p>
                 </div>
                 {data.personal.photo && (
-                    <div className="w-24 h-24 relative rounded-md overflow-hidden shadow-lg border-2 flex-shrink-0" style={{ borderColor: color }}>
+                    <div className="w-16 h-16 relative rounded-md overflow-hidden shadow-lg border-2 flex-shrink-0" style={{ borderColor: color }}>
                         <Image
                             src={data.personal.photo}
                             alt={data.personal.name}
-                            width={96}
-                            height={96}
+                            width={64}
+                            height={64}
                             className="object-cover"
                         />
                     </div>
                 )}
             </header>
 
-            <main className="grid grid-cols-3 gap-8 relative z-10">
+            <main className="grid grid-cols-3 gap-4 relative z-10">
                 {/* Left Column */}
-                <aside className="col-span-1 space-y-8">
+                <aside className="col-span-1 space-y-4">
                     <section>
-                        <h3 className="font-bold text-lg uppercase flex items-center gap-2 mb-3" style={{ color }}><HardHat size={20} /> {t(language, 'contact')}</h3>
-                        <div className="text-sm space-y-2" style={lightTextStyle}>
-                            <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:underline"><Phone size={14} /> {data.personal.phone}</a>
-                            <a href={getMailtoLink(data.personal.email)} className="flex items-center gap-2 break-all hover:underline"><Mail size={14} /> {data.personal.email}</a>
-                            <p className="flex items-center gap-2"><MapPin size={14} /> {data.personal.location}</p>
-                            {data.personal.website && <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:underline"><Globe size={14} /> {data.personal.website}</a>}
+                        <h3 className="font-bold text-sm uppercase flex items-center gap-1.5 mb-2" style={{ color }}><HardHat size={16} /> {t(language, 'contact')}</h3>
+                        <div className="text-xs space-y-1.5" style={lightTextStyle}>
+                            <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:underline"><Phone size={12} /> {data.personal.phone}</a>
+                            <a href={getMailtoLink(data.personal.email)} className="flex items-center gap-1.5 break-all hover:underline"><Mail size={12} /> {data.personal.email}</a>
+                            <p className="flex items-center gap-1.5"><MapPin size={12} /> {data.personal.location}</p>
+                            {data.personal.website && <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:underline"><Globe size={12} /> {data.personal.website}</a>}
                         </div>
                     </section>
                     {data.skills && (
                         <section>
-                            <h3 className="font-bold text-lg uppercase flex items-center gap-2 mb-3" style={{ color }}><Wrench size={20} /> {t(language, 'skills')}</h3>
-                            <ul className="text-sm list-disc list-inside space-y-1" style={lightTextStyle}>
+                            <h3 className="font-bold text-sm uppercase flex items-center gap-1.5 mb-2" style={{ color }}><Wrench size={16} /> {t(language, 'skills')}</h3>
+                            <ul className="text-xs list-disc list-inside space-y-0.5" style={lightTextStyle}>
                                 {(data.skills || '').split(',').map(skill => skill.trim()).filter(Boolean).map(skill => (
                                     <li key={skill}>{skill}</li>
                                 ))}
@@ -85,31 +85,37 @@ export const ConstructTemplatePreview = ({ data, color, bgColor, textColor, font
                 </aside>
 
                 {/* Right Column */}
-                <main className="col-span-2 space-y-8">
+                <div className="col-span-2 space-y-4">
                     {data.personal.description && (
                         <section>
-                            <SectionHeader title={t(language, 'profile')} icon={<User size={16} color={bgColor} />} color={color} textColor={textColor} />
-                            <p className="text-sm whitespace-pre-line" style={lightTextStyle}>{data.personal.description}</p>
+                            <SectionHeader title={t(language, 'profile')} icon={<User size={14} color={bgColor} />} color={color} textColor={textColor} />
+                            <p className="text-xs whitespace-pre-line leading-relaxed" style={lightTextStyle}>{data.personal.description}</p>
                         </section>
                     )}
                     {data.experience && data.experience.length > 0 && (
                         <section>
-                            <SectionHeader title={t(language, 'experience')} icon={<Briefcase size={16} color={bgColor} />} color={color} textColor={textColor} />
-                            <div className="space-y-5">
+                            <SectionHeader title={t(language, 'experience')} icon={<Briefcase size={14} color={bgColor} />} color={color} textColor={textColor} />
+                            <div className="space-y-3">
                                 {data.experience.map(exp => (
                                     <div key={exp.id}>
                                         <div className="flex justify-between items-baseline gap-4">
                                             <div className="flex-grow w-0">
-                                                <h3 className="font-bold text-md">{exp.role}</h3>
-                                                <h4 className="font-semibold text-sm" style={{ color: color }}>{exp.company}</h4>
+                                                <h3 className="font-bold text-xs">{exp.role}</h3>
+                                                <h4 className="font-semibold text-xs" style={{ color: color }}>{exp.company}</h4>
                                             </div>
                                             <p className="text-xs font-mono flex-shrink-0 text-right" style={lightTextStyle}>{exp.date}</p>
                                         </div>
-                                        <div className="text-sm prose max-w-none mt-1" style={lightTextStyle}>
-                                            {exp.description.split('\n').map((line, i) => (
-                                                <div key={i}>{line}</div>
-                                            ))}
-                                        </div>
+                                         <div className="text-xs leading-relaxed mt-0.5 space-y-1" style={lightTextStyle}>
+                                             {exp.description.split('\n')
+                                                 .map(line => line.trim())
+                                                 .filter(line => line.length > 0)
+                                                 .map((line, i) => (
+                                                     <div key={i} className="flex items-start gap-1.5">
+                                                         <span className="flex-shrink-0 select-none">•</span>
+                                                         <span className="flex-grow w-0">{line.replace(/^[-*•]\s*/, '')}</span>
+                                                     </div>
+                                                 ))}
+                                         </div>
                                     </div>
                                 ))}
                             </div>
@@ -117,18 +123,18 @@ export const ConstructTemplatePreview = ({ data, color, bgColor, textColor, font
                     )}
                     {data.education && data.education.length > 0 && (
                         <section>
-                            <SectionHeader title={t(language, 'education')} icon={<GraduationCap size={16} color={bgColor} />} color={color} textColor={textColor} />
-                            <div className="space-y-5">
+                            <SectionHeader title={t(language, 'education')} icon={<GraduationCap size={14} color={bgColor} />} color={color} textColor={textColor} />
+                            <div className="space-y-3">
                                 {data.education.map(edu => (
                                     <div key={edu.id}>
                                         <div className="flex justify-between items-baseline gap-4">
                                             <div className="flex-grow w-0">
-                                                <h3 className="font-bold text-md">{edu.degree}</h3>
-                                                <h4 className="font-semibold text-sm" style={{ color: color }}>{edu.institution}</h4>
+                                                <h3 className="font-bold text-xs">{edu.degree}</h3>
+                                                <h4 className="font-semibold text-xs" style={{ color: color }}>{edu.institution}</h4>
                                             </div>
                                             <p className="text-xs font-mono flex-shrink-0 text-right" style={lightTextStyle}>{edu.date}</p>
                                         </div>
-                                        <p className="text-sm whitespace-pre-line mt-1" style={lightTextStyle}>{edu.description}</p>
+                                        {edu.description && <p className="text-xs leading-relaxed mt-0.5" style={lightTextStyle}>{edu.description}</p>}
                                     </div>
                                 ))}
                             </div>
@@ -136,19 +142,19 @@ export const ConstructTemplatePreview = ({ data, color, bgColor, textColor, font
                     )}
                     {data.projects && data.projects.length > 0 && (
                         <section>
-                            <SectionHeader title={t(language, 'projects')} icon={<Code size={16} color={bgColor} />} color={color} textColor={textColor} />
-                            <div className="space-y-5">
+                            <SectionHeader title={t(language, 'projects')} icon={<Code size={14} color={bgColor} />} color={color} textColor={textColor} />
+                            <div className="space-y-3">
                                 {data.projects.map(proj => (
                                     <div key={proj.id}>
-                                        <a href={proj.link} target="_blank" rel="noreferrer" className="font-bold text-md hover:underline" style={{ color }}>{proj.name}</a>
-                                        <div className="text-sm whitespace-pre-line prose max-w-none mt-1" style={lightTextStyle}>{proj.description}</div>
-                                        <p className="text-sm font-semibold mt-1" style={lightTextStyle}>Technologies: {proj.technologies}</p>
+                                        <a href={getWebsiteLink(proj.link || '')} target="_blank" rel="noreferrer" className="font-bold text-xs hover:underline" style={{ color }}>{proj.name}</a>
+                                        {proj.description && <div className="text-xs leading-relaxed mt-0.5" style={lightTextStyle}>{proj.description}</div>}
+                                        <p className="text-xs font-semibold mt-0.5" style={lightTextStyle}>Tech: {proj.technologies}</p>
                                     </div>
                                 ))}
                             </div>
                         </section>
                     )}
-                </main>
+                </div>
             </main>
         </div>
     );

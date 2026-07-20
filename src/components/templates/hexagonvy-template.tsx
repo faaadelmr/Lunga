@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Globe, Code } from 'lucide-react';
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 const SectionHeader = ({ title, color, textColor }: { title: string, color: string, textColor: string }) => (
     <div className='flex items-center gap-3 mb-4'>
@@ -102,9 +103,15 @@ export const HexagonvyTemplatePreview = ({ data, color, bgColor, textColor, font
                                         <div className="col-span-2">
                                             <h3 className="font-bold uppercase text-md">{exp.role}</h3>
                                             <div className="text-sm prose max-w-none mt-1" style={lightTextStyle}>
-                                                {exp.description.split('\n').map((line, i) => (
-                                                    <div key={i}>{line}</div>
-                                                ))}
+                                                {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                                             </div>
                                         </div>
                                     </div>

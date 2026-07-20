@@ -92,10 +92,16 @@ export const DiamondTemplatePreview = ({ data, color, bgColor, textColor, font, 
                                             <p className="font-semibold" style={{ color }}>{exp.role}</p>
                                             <p className="text-xs">{exp.company}</p>
                                         </div>
-                                        <div className="col-span-2 text-xs prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
-                                            {exp.description.split('\n').map((line, i) => (
-                                                <div key={i}>{line}</div>
-                                            ))}
+                                        <div className="col-span-2 text-xs prose max-w-none space-y-1" style={{ color: textColor, opacity: 0.8 }}>
+                                            {exp.description.split('\n')
+                                                .map(line => line.trim())
+                                                .filter(line => line.length > 0)
+                                                .map((line, i) => (
+                                                    <div key={i} className="flex items-start gap-1.5">
+                                                        <span className="flex-shrink-0 select-none">•</span>
+                                                        <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                                                    </div>
+                                                ))}
                                         </div>
                                     </div>
                                 ))}

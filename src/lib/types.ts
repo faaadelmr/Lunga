@@ -35,7 +35,7 @@ export interface ResumeData {
 }
 
 export type Template = 'git-folio' | 'ats-friendly' | 'blox' | 'ledger' | 'construct' | 'starlight' | 'modern' | 'classic' | 'creative' | 'swiss' | 'elegant' | 'professional' | 'timeline' | 'smart-start' | 'vektoristik' | 'awesome' | 'cooper' | 'quete' | 'diamond' | 'hexagonvy' | 'glassmorphism' | 'developer-cli' | 'neo-brutalist';
-export type Font = 'Inter' | 'Space Grotesk' | 'Roboto' | 'Lato' | 'Montserrat' | 'Open Sans' | 'Merriweather' | 'Source Sans Pro' | 'Playfair Display';
+export type Font = string;
 export type Language = 'en' | 'id';
 
 

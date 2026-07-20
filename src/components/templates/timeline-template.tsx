@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Briefcase, GraduationCap, Award, User, Home, Code 
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 export const TimelineTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
   const fontStyle = { fontFamily: font };
@@ -124,9 +125,15 @@ export const TimelineTemplatePreview = ({ data, color, bgColor, textColor, font,
                     </div>
                     <p className="text-sm mb-2" style={{ opacity: 0.8 }}>{exp.company}</p>
                     <div className="text-sm prose max-w-none prose-sm" style={{ opacity: 0.8 }}>
-                      {exp.description.split('\n').map((line, i) => (
-                        <div key={i}>{line}</div>
-                      ))}
+                      {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                     </div>
                   </div>
                 ))}

@@ -5,6 +5,7 @@ import { Mail, Phone, Globe, Award, Briefcase, GraduationCap, User, Wrench, Code
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 const Section = ({ icon, title, children }: { icon: React.ReactNode, title: string, children: React.ReactNode }) => (
     <div className="mb-6">
@@ -25,7 +26,7 @@ const ContactItem = ({ icon, text }: { icon: React.ReactNode, text: string | Rea
         <div className="w-8 h-8 rounded-full flex items-center justify-center mr-3 bg-current">
             {icon}
         </div>
-        <span className="text-xs">{text}</span>
+        <span className={themeStandards.typography.body}>{text}</span>
     </div>
 );
 
@@ -74,9 +75,15 @@ export const AwesomeTemplatePreview = ({ data, color, bgColor, textColor, font, 
                                         <h3 className="font-bold text-md">{exp.role}</h3>
                                         <p className="text-sm font-semibold" style={accentColorStyle}>{exp.company} ({exp.date})</p>
                                         <div className="text-xs prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
-                                            {exp.description.split('\n').map((line, i) => (
-                                                <div key={i}>{line}</div>
-                                            ))}
+                                            {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                                         </div>
                                     </div>
                                 ))}

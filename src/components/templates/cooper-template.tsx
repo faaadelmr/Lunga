@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Globe, Code, Briefcase, GraduationCap } from 'luci
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
+import { themeStandards } from '@/lib/theme-standards';
 
 const SectionHeader = ({ title, color, textColor }: { title: string, color: string, textColor: string }) => (
     <div className='mb-4'>
@@ -102,9 +103,15 @@ export const CooperTemplatePreview = ({ data, color, bgColor, textColor, font, l
                                 <h3 className="font-bold text-lg" style={{ color: textColor }}>{exp.role} at {exp.company}</h3>
                                 <p className="text-sm font-semibold my-1" style={{ color: textColor, opacity: 0.8 }}>{exp.date}</p>
                                 <div className="text-sm prose max-w-none" style={{ color: textColor, opacity: 0.7 }}>
-                                    {exp.description.split('\n').map((line, i) => (
-                                        <div key={i}>{line}</div>
-                                    ))}
+                                    {exp.description.split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line.length > 0)
+                  .map((line, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <span className="flex-shrink-0 select-none">•</span>
+                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                    </div>
+                  ))}
                                 </div>
                             </div>
                         ))}
