@@ -27,6 +27,9 @@ import { LedgerTemplatePreview } from "./templates/ledger-template";
 import { BloxTemplatePreview } from "./templates/blox-template";
 import { AtsFriendlyTemplatePreview } from "./templates/ats-friendly-template";
 import { GitFolioTemplatePreview } from "./templates/git-folio-template";
+import { GlassmorphismTemplatePreview } from "./templates/glassmorphism-template";
+import { DeveloperCliTemplatePreview } from "./templates/developer-cli-template";
+import { NeoBrutalistTemplatePreview } from "./templates/neo-brutalist-template";
 import type { Font } from "@/lib/types";
 
 
@@ -90,6 +93,15 @@ const templateMap = {
   },
   elegant: {
     preview: ElegantTemplatePreview,
+  },
+  glassmorphism: {
+    preview: GlassmorphismTemplatePreview,
+  },
+  'developer-cli': {
+    preview: DeveloperCliTemplatePreview,
+  },
+  'neo-brutalist': {
+    preview: NeoBrutalistTemplatePreview,
   },
 };
 

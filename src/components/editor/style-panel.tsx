@@ -29,8 +29,14 @@ import { LedgerTemplatePreview } from "../templates/ledger-template";
 import { BloxTemplatePreview } from "../templates/blox-template";
 import { AtsFriendlyTemplatePreview } from "../templates/ats-friendly-template";
 import { GitFolioTemplatePreview } from "../templates/git-folio-template";
+import { GlassmorphismTemplatePreview } from "../templates/glassmorphism-template";
+import { DeveloperCliTemplatePreview } from "../templates/developer-cli-template";
+import { NeoBrutalistTemplatePreview } from "../templates/neo-brutalist-template";
 
 const templates: { id: Template, name: string, component: React.FC<any> }[] = [
+  { id: 'glassmorphism', name: 'Glassmorphism', component: GlassmorphismTemplatePreview },
+  { id: 'developer-cli', name: 'Developer CLI', component: DeveloperCliTemplatePreview },
+  { id: 'neo-brutalist', name: 'Neo-Brutalist', component: NeoBrutalistTemplatePreview },
   { id: 'git-folio', name: 'Git-folio', component: GitFolioTemplatePreview },
   { id: 'ats-friendly', name: 'ATS Friendly', component: AtsFriendlyTemplatePreview },
   { id: 'blox', name: 'Blox', component: BloxTemplatePreview },

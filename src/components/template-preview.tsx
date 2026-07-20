@@ -19,6 +19,9 @@ import { LedgerTemplatePreview } from '@/components/templates/ledger-template';
 import { BloxTemplatePreview } from '@/components/templates/blox-template';
 import { AtsFriendlyTemplatePreview } from '@/components/templates/ats-friendly-template';
 import { GitFolioTemplatePreview } from '@/components/templates/git-folio-template';
+import { GlassmorphismTemplatePreview } from '@/components/templates/glassmorphism-template';
+import { DeveloperCliTemplatePreview } from '@/components/templates/developer-cli-template';
+import { NeoBrutalistTemplatePreview } from '@/components/templates/neo-brutalist-template';
 
 interface TemplatePreviewComponentProps {
   data: ResumeData;
@@ -78,6 +81,9 @@ export const TemplatePreviewComponent = ({
     creative: CreativeTemplatePreview,
     swiss: SwissTemplatePreview,
     elegant: ElegantTemplatePreview,
+    glassmorphism: GlassmorphismTemplatePreview,
+    'developer-cli': DeveloperCliTemplatePreview,
+    'neo-brutalist': NeoBrutalistTemplatePreview,
   };
 
   // Get the component, defaulting to ModernTemplatePreview if not found

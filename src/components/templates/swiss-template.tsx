@@ -14,61 +14,61 @@ export const SwissTemplatePreview = ({ data, color, bgColor, textColor, font, la
   const lighterTextStyle = { color: textColor, opacity: 0.6 };
 
   return (
-    <div className="p-10 h-full overflow-hidden" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
-      <div className="grid grid-cols-12 gap-x-12">
+    <div className="p-8 h-full overflow-hidden" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
+      <div className="grid grid-cols-12 gap-x-8">
         {/* Header */}
-        <header className="col-span-12 border-b-4 pb-6 mb-8 flex items-center justify-between" style={{ borderColor: textColor }}>
+        <header className="col-span-12 border-b-2 pb-4 mb-6 flex items-center justify-between" style={{ borderColor: textColor }}>
           <div>
-            <h1 className="font-bold tracking-tighter uppercase" style={{ ...fontStyle, ...accentColor, fontSize: '2.5rem' }}>{data.personal.name}</h1>
-            <p className="font-light mt-1" style={{ ...fontStyle, fontSize: '1.5rem', ...lightTextStyle }}>{data.personal.role}</p>
+            <h1 className="font-extrabold tracking-tighter uppercase leading-none" style={{ ...fontStyle, ...accentColor, fontSize: '2.25rem' }}>{data.personal.name}</h1>
+            <p className="font-medium mt-1.5" style={{ ...fontStyle, fontSize: '1.25rem', ...lightTextStyle }}>{data.personal.role}</p>
           </div>
           {data.personal.photo && (
-            <div className="w-24 h-24 relative rounded-full overflow-hidden shadow-md flex-shrink-0 border-2" style={{ borderColor: color }}>
+            <div className="w-20 h-20 relative rounded-full overflow-hidden shadow-sm flex-shrink-0 border-2" style={{ borderColor: color }}>
               <Image
                 src={data.personal.photo}
                 alt={data.personal.name}
-                width={96}
-                height={96}
-                className="object-cover"
+                width={80}
+                height={80}
+                className="object-cover w-full h-full"
               />
             </div>
           )}
         </header>
 
         {/* Left Column */}
-        <aside className="col-span-4 pr-8 border-r" style={{ borderColor: `${textColor}20` }}>
-          <section className="mb-8">
-            <h2 className="text-sm font-bold uppercase tracking-[0.2em] mb-4" style={{ ...accentColor, ...fontStyle }}>{t(language, 'contact')}</h2>
-            <div className="space-y-2 text-sm" style={lightTextStyle}>
-              <a href={getMailtoLink(data.personal.email)} className="flex items-center gap-3 hover:underline">
-                <Mail size={14} style={lighterTextStyle} />
-                <span>{data.personal.email}</span>
+        <aside className="col-span-4 pr-6 border-r" style={{ borderColor: `${textColor}20` }}>
+          <section className="mb-6">
+            <h2 className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ ...accentColor, ...fontStyle }}>{t(language, 'contact')}</h2>
+            <div className="space-y-2 text-xs" style={lightTextStyle}>
+              <a href={getMailtoLink(data.personal.email)} className="flex items-center gap-2 hover:underline">
+                <Mail size={12} style={lighterTextStyle} />
+                <span className="truncate">{data.personal.email}</span>
               </a>
-              <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:underline">
-                <Phone size={14} style={lighterTextStyle} />
+              <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:underline">
+                <Phone size={12} style={lighterTextStyle} />
                 <span>{data.personal.phone}</span>
               </a>
-              <div className="flex items-center gap-3">
-                <MapPin size={14} style={lighterTextStyle} />
+              <div className="flex items-center gap-2">
+                <MapPin size={12} style={lighterTextStyle} />
                 <span>{data.personal.location}</span>
               </div>
               {data.personal.website && (
-                <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:underline">
-                  <Globe size={14} style={lighterTextStyle} />
-                  <span style={accentColor}>{data.personal.website}</span>
+                <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:underline">
+                  <Globe size={12} style={lighterTextStyle} />
+                  <span className="truncate" style={accentColor}>{data.personal.website}</span>
                 </a>
               )}
             </div>
           </section>
 
           {data.skills && (
-            <section className="mb-8">
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] mb-4" style={{ ...accentColor, ...fontStyle }}>{t(language, 'skills')}</h2>
-              <ul className="space-y-1.5 text-sm" style={lightTextStyle}>
+            <section className="mb-6">
+              <h2 className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ ...accentColor, ...fontStyle }}>{t(language, 'skills')}</h2>
+              <ul className="space-y-1 text-xs" style={lightTextStyle}>
                 {(data.skills || '').split(',').map(skill => skill.trim()).filter(Boolean).map(skill => (
                   <li key={skill} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }}></span>
-                    {skill}
+                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: color }}></span>
+                    <span>{skill}</span>
                   </li>
                 ))}
               </ul>
@@ -79,63 +79,69 @@ export const SwissTemplatePreview = ({ data, color, bgColor, textColor, font, la
         {/* Right Column */}
         <main className="col-span-8">
           {data.personal.description && (
-            <section className="mb-10">
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] mb-5" style={{ ...accentColor, ...fontStyle }}>{t(language, 'profile')}</h2>
-              <p className="text-sm whitespace-pre-line" style={lightTextStyle}>{data.personal.description}</p>
+            <section className="mb-6">
+              <h2 className="text-xs font-bold uppercase tracking-[0.25em] mb-2" style={{ ...accentColor, ...fontStyle }}>{t(language, 'profile')}</h2>
+              <p className="text-xs leading-relaxed" style={lightTextStyle}>{data.personal.description}</p>
             </section>
           )}
 
           {data.experience && data.experience.length > 0 && (
-            <section className="mb-10">
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] mb-5" style={{ ...accentColor, ...fontStyle }}>{t(language, 'experience')}</h2>
-              {data.experience.map(exp => (
-                <div key={exp.id} className="mb-6">
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h3 className="font-bold" style={{ ...fontStyle, fontSize: '1.25rem', ...textStyle }}>{exp.role}</h3>
-                    <p className="text-xs font-mono" style={lighterTextStyle}>{exp.date}</p>
+            <section className="mb-6">
+              <h2 className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ ...accentColor, ...fontStyle }}>{t(language, 'experience')}</h2>
+              <div className="space-y-4">
+                {data.experience.map(exp => (
+                  <div key={exp.id} className="space-y-1">
+                    <div className="flex justify-between items-baseline">
+                      <h3 className="font-bold text-sm" style={{ ...fontStyle, ...textStyle }}>{exp.role}</h3>
+                      <p className="text-xs font-mono" style={lighterTextStyle}>{exp.date}</p>
+                    </div>
+                    <h4 className="font-semibold text-xs" style={{ ...fontStyle, color }}>{exp.company}</h4>
+                    <div className="text-xs leading-relaxed" style={lightTextStyle}>
+                      {exp.description.split('\n').map((line, i) => (
+                        <div key={i}>{line}</div>
+                      ))}
+                    </div>
                   </div>
-                  <h4 className="font-semibold text-lg mb-2" style={{ ...fontStyle, fontSize: '1.125rem', ...lightTextStyle }}>{exp.company}</h4>
-                  <div className="text-sm prose max-w-none prose-sm" style={lightTextStyle}>
-                    {exp.description.split('\n').map((line, i) => (
-                      <div key={i}>{line}</div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </section>
           )}
 
           {data.education && data.education.length > 0 && (
-            <section className="mb-10">
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] mb-5" style={{ ...accentColor, ...fontStyle }}>{t(language, 'education')}</h2>
-              {data.education.map(edu => (
-                <div key={edu.id} className="mb-6">
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h3 className="font-bold" style={{ ...fontStyle, fontSize: '1.25rem', ...textStyle }}>{edu.institution}</h3>
-                    <p className="text-xs font-mono" style={lighterTextStyle}>{edu.date}</p>
+            <section className="mb-6">
+              <h2 className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ ...accentColor, ...fontStyle }}>{t(language, 'education')}</h2>
+              <div className="space-y-4">
+                {data.education.map(edu => (
+                  <div key={edu.id} className="space-y-1">
+                    <div className="flex justify-between items-baseline">
+                      <h3 className="font-bold text-sm" style={{ ...fontStyle, ...textStyle }}>{edu.degree}</h3>
+                      <p className="text-xs font-mono" style={lighterTextStyle}>{edu.date}</p>
+                    </div>
+                    <h4 className="font-semibold text-xs" style={{ ...fontStyle, ...lightTextStyle }}>{edu.institution}</h4>
+                    {edu.description && <p className="text-xs leading-relaxed" style={lightTextStyle}>{edu.description}</p>}
                   </div>
-                  <h4 className="font-semibold text-lg mb-2" style={{ ...fontStyle, fontSize: '1.125rem', ...lightTextStyle }}>{edu.degree}</h4>
-                  <p className="text-sm whitespace-pre-line" style={lightTextStyle}>{edu.description}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </section>
           )}
 
           {data.projects && data.projects.length > 0 && (
             <section>
-              <h2 className="text-sm font-bold uppercase tracking-[0.2em] mb-5" style={{ ...accentColor, ...fontStyle }}>{t(language, 'projects')}</h2>
-              {data.projects.map(proj => (
-                <div key={proj.id} className="mb-6">
-                  <h3 className="font-bold" style={{ ...fontStyle, fontSize: '1.25rem', ...textStyle }}>{proj.name}</h3>
-                  {proj.link && (
-                    <div className="text-sm mt-1" style={lightTextStyle}>
-                      Link: <a href={proj.link} target="_blank" rel="noreferrer" className="hover:underline break-all" style={accentColor}>{proj.link}</a>
+              <h2 className="text-xs font-bold uppercase tracking-[0.25em] mb-3" style={{ ...accentColor, ...fontStyle }}>{t(language, 'projects')}</h2>
+              <div className="space-y-4">
+                {data.projects.map(proj => (
+                  <div key={proj.id} className="space-y-1">
+                    <div className="flex justify-between items-baseline">
+                      <h3 className="font-bold text-sm" style={{ ...fontStyle, ...textStyle }}>{proj.name}</h3>
+                      {proj.link && (
+                        <a href={getWebsiteLink(proj.link)} target="_blank" rel="noreferrer" className="text-xs hover:underline" style={accentColor}>Link</a>
+                      )}
                     </div>
-                  )}
-                  <p className="text-sm whitespace-pre-line my-1" style={lightTextStyle}>{proj.description}</p>
-                  <p className="text-sm font-semibold" style={lightTextStyle}>Technologies: {proj.technologies}</p>
-                </div>
-              ))}
+                    {proj.description && <p className="text-xs leading-relaxed" style={lightTextStyle}>{proj.description}</p>}
+                    <p className="text-xs font-semibold" style={lightTextStyle}>Tech: {proj.technologies}</p>
+                  </div>
+                ))}
+              </div>
             </section>
           )}
         </main>
