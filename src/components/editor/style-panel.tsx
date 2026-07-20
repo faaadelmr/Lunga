@@ -34,7 +34,7 @@ import { DeveloperCliTemplatePreview } from "../templates/developer-cli-template
 import { NeoBrutalistTemplatePreview } from "../templates/neo-brutalist-template";
 import { GoogleFontLoader } from "../google-font-loader";
 
-const templates: { id: Template, name: string, component: React.FC<any> }[] = [
+export const templates: { id: Template, name: string, component: React.FC<any> }[] = [
   { id: 'glassmorphism', name: 'Glassmorphism', component: GlassmorphismTemplatePreview },
   { id: 'developer-cli', name: 'Developer CLI', component: DeveloperCliTemplatePreview },
   { id: 'neo-brutalist', name: 'Neo-Brutalist', component: NeoBrutalistTemplatePreview },
