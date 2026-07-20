@@ -48,8 +48,7 @@ export const SmartStartTemplatePreview = ({ data, color, bgColor, textColor, fon
                                 <Image
                                     src={data.personal.photo}
                                     alt={data.personal.name}
-                                    width={192}
-                                    height={224}
+                                    fill
                                     className="object-cover"
                                 />
                                 <div className="absolute inset-0 border-2" style={{ borderColor: color }}></div>
@@ -108,7 +107,11 @@ export const SmartStartTemplatePreview = ({ data, color, bgColor, textColor, fon
                                     <div key={exp.id} className="border-l-2 pl-4" style={{ borderColor: color }}>
                                         <h3 className="font-bold text-lg" style={mainTextStyle}>{exp.role}</h3>
                                         <p className="font-semibold" style={mainAccentColorStyle}>{exp.company} | {exp.date}</p>
-                                        <div className="text-sm mt-1 whitespace-pre-line prose max-w-none" style={lightTextStyle}>{exp.description}</div>
+                                        <div className="text-sm mt-1 prose max-w-none" style={lightTextStyle}>
+                                            {exp.description.split('\n').map((line, i) => (
+                                                <div key={i}>{line}</div>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

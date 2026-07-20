@@ -72,7 +72,11 @@ export const ClassicTemplatePreview = ({ data, color, bgColor, textColor, font, 
                   <p className="text-sm" style={lightTextStyle}>{exp.date}</p>
                 </div>
                 <h4 className="font-semibold mb-2" style={{ ...fontStyle, fontSize: '1.125rem', ...lightTextStyle, opacity: 0.9 }}>{exp.company}</h4>
-                <div className="text-sm whitespace-pre-line prose max-w-none" style={lightTextStyle}>{exp.description}</div>
+                <div className="text-sm prose max-w-none" style={lightTextStyle}>
+                  {exp.description.split('\n').map((line, i) => (
+                    <div key={i}>{line}</div>
+                  ))}
+                </div>
               </div>
             ))}
           </section>

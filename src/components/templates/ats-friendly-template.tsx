@@ -63,7 +63,11 @@ export const AtsFriendlyTemplatePreview = ({ data, color, bgColor, textColor, fo
                 <p className="text-sm font-mono" style={lightTextStyle}>{exp.date}</p>
               </div>
               <p className="font-semibold italic">{exp.role}</p>
-              <div className="text-sm whitespace-pre-line text-justify mt-1" style={lightTextStyle}>{exp.description}</div>
+              <div className="text-sm text-justify mt-1" style={lightTextStyle}>
+                {exp.description.split('\n').map((line, i) => (
+                  <div key={i}>{line}</div>
+                ))}
+              </div>
             </div>
           ))}
         </Section>

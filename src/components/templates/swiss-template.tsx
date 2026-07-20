@@ -95,7 +95,11 @@ export const SwissTemplatePreview = ({ data, color, bgColor, textColor, font, la
                     <p className="text-xs font-mono" style={lighterTextStyle}>{exp.date}</p>
                   </div>
                   <h4 className="font-semibold text-lg mb-2" style={{ ...fontStyle, fontSize: '1.125rem', ...lightTextStyle }}>{exp.company}</h4>
-                  <div className="text-sm whitespace-pre-line prose max-w-none prose-sm" style={lightTextStyle}>{exp.description}</div>
+                  <div className="text-sm prose max-w-none prose-sm" style={lightTextStyle}>
+                    {exp.description.split('\n').map((line, i) => (
+                      <div key={i}>{line}</div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </section>

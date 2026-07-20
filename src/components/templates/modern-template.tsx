@@ -33,8 +33,7 @@ export const ModernTemplatePreview = ({ data, color, bgColor, textColor, font, l
             <Image
               src={data.personal.photo}
               alt={data.personal.name}
-              width={112}
-              height={112}
+              fill
               className="object-cover"
             />
           </div>
@@ -42,16 +41,16 @@ export const ModernTemplatePreview = ({ data, color, bgColor, textColor, font, l
         <div className={data.personal.photo ? "text-right flex-grow" : "text-center w-full"}>
           <h1 className="font-bold" style={{ ...fontStyle, color, fontSize: '3rem' }}>{data.personal.name}</h1>
           <p className="font-light mt-2" style={{ ...fontStyle, fontSize: '1.25rem', ...lightTextStyle }}>{data.personal.role}</p>
-          <div className={cn("flex items-center gap-x-4 text-sm mt-4", data.personal.photo ? "justify-end" : "justify-center")} style={lightTextStyle}>
-            <a href={getMailtoLink(data.personal.email)} className="flex items-center gap-2 hover:underline"><Mail size={14} /> {data.personal.email}</a>
+          <div className={cn("flex items-center gap-x-2 text-xs mt-4 whitespace-nowrap", data.personal.photo ? "justify-end" : "justify-center")} style={lightTextStyle}>
+            <a href={getMailtoLink(data.personal.email)} className="flex items-center gap-1 hover:underline"><Mail size={12} /> {data.personal.email}</a>
             <span className="opacity-50">&bull;</span>
-            <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:underline"><Phone size={14} /> {data.personal.phone}</a>
+            <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:underline"><Phone size={12} /> {data.personal.phone}</a>
             <span className="opacity-50">&bull;</span>
-            <div className="flex items-center gap-2"><MapPin size={14} /> {data.personal.location}</div>
+            <div className="flex items-center gap-1"><MapPin size={12} /> {data.personal.location}</div>
             {data.personal.website && (
               <>
                 <span className="opacity-50">&bull;</span>
-                <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-2" style={{ color }}><Globe size={14} />{data.personal.website}</a>
+                <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1" style={{ color }}><Globe size={12} />{data.personal.website}</a>
               </>
             )}
           </div>
@@ -77,7 +76,11 @@ export const ModernTemplatePreview = ({ data, color, bgColor, textColor, font, l
                 <p className="text-sm font-mono" style={lightTextStyle}>{exp.date}</p>
               </div>
               <h4 className="text-lg font-semibold mb-2" style={{ ...fontStyle, color, fontSize: '1.125rem' }}>{exp.company}</h4>
-              <div className="text-sm whitespace-pre-line prose max-w-none prose-sm" style={lightTextStyle}>{exp.description}</div>
+              <div className="text-sm prose max-w-none prose-sm" style={lightTextStyle}>
+                {exp.description.split('\n').map((line, i) => (
+                  <div key={i}>{line}</div>
+                ))}
+              </div>
             </div>
           ))}
         </section>

@@ -109,21 +109,14 @@ export function AiAssistPanel() {
               <SelectValue placeholder="Select AI model" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="gemini-flash-lite-latest">🪶 Gemini Flash Lite Latest (Recommended)</SelectItem>
               <SelectItem value="gemini-3.5-flash">⚡ Gemini 3.5 Flash</SelectItem>
-              <SelectItem value="gemini-3.1-flash-lite">🪶 Gemini 3.1 Flash Lite</SelectItem>
-              <SelectItem value="gemini-3-flash-preview">🚀 Gemini 3 Flash Preview</SelectItem>
-              <SelectItem value="gemini-3.1-pro-preview">🧠 Gemini 3.1 Pro Preview</SelectItem>
-              <SelectItem value="gemini-pro-latest">⭐ Gemini Pro Latest</SelectItem>
-              <SelectItem value="gemini-flash-latest">🎯 Gemini Flash Latest</SelectItem>
-              <SelectItem value="gemini-flash-lite-latest">💨 Gemini Flash-Lite Latest</SelectItem>
             </SelectContent>
           </Select>
           <p className="text-xs text-muted-foreground">
-            {selectedAiModel.includes('pro')
-              ? '🧠 Capable model - best for complex layouts and reasoning'
-              : selectedAiModel.includes('lite')
-                ? '🪶 Lightweight - faster response time'
-                : '⚡ Fast and balanced performance'}
+            {selectedAiModel === 'gemini-flash-lite-latest'
+              ? '🪶 Lightweight - faster response time, highly recommended for PDF'
+              : '⚡ Powerful - better accuracy for images & complex layouts'}
           </p>
           <p className="text-xs text-green-600 dark:text-green-400">Powered by Gemini AI Genkit</p>
         </div>

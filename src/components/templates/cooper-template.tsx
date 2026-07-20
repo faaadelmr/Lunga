@@ -101,7 +101,11 @@ export const CooperTemplatePreview = ({ data, color, bgColor, textColor, font, l
                             <div key={exp.id} className="mb-5">
                                 <h3 className="font-bold text-lg" style={{ color: textColor }}>{exp.role} at {exp.company}</h3>
                                 <p className="text-sm font-semibold my-1" style={{ color: textColor, opacity: 0.8 }}>{exp.date}</p>
-                                <div className="text-sm whitespace-pre-line prose max-w-none" style={{ color: textColor, opacity: 0.7 }}>{exp.description}</div>
+                                <div className="text-sm prose max-w-none" style={{ color: textColor, opacity: 0.7 }}>
+                                    {exp.description.split('\n').map((line, i) => (
+                                        <div key={i}>{line}</div>
+                                    ))}
+                                </div>
                             </div>
                         ))}
                     </div>

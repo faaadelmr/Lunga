@@ -36,12 +36,25 @@ const SectionHeader = ({ icon, title, color }: { icon: React.ReactNode, title: s
     </div>
 );
 
+// Helper function to determine if a color is light or dark
+const isColorLight = (hexColor: string) => {
+    if (!hexColor.startsWith('#')) return false;
+    const hex = hexColor.replace('#', '');
+    if (hex.length !== 6) return false;
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 155;
+};
+
 export const QueteTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
     const fontStyle = { fontFamily: font };
     const textStyle = { color: textColor };
     const lightTextStyle = { color: textColor, opacity: 0.8 };
 
     const skills = (data.skills || '').split(',').map(s => s.trim()).filter(Boolean);
+    const headerTextColor = isColorLight(color) ? '#1E293B' : '#FFFFFF';
 
     return (
         <div className="relative w-full h-full p-8 overflow-hidden" style={{ ...fontStyle, backgroundColor: bgColor }}>
@@ -52,94 +65,111 @@ export const QueteTemplatePreview = ({ data, color, bgColor, textColor, font, la
                 {/* Header */}
                 <header className="flex items-center w-full mb-10 pl-8">
                     {data.personal.photo && (
-                        <div className="w-40 h-40 relative rounded-full overflow-hidden shadow-lg flex-shrink-0 mr-8 border-4 border-white bg-white">
+                        <div className="w-32 h-32 relative rounded-full overflow-hidden shadow-lg flex-shrink-0 mr-8 border-4 border-white bg-white">
                             <Image
                                 src={data.personal.photo}
                                 alt={data.personal.name}
-                                width={160}
-                                height={160}
+                                fill
                                 className="object-cover"
                             />
                         </div>
                     )}
-                    <div className="flex-grow">
-                        <h1 className="font-bold uppercase tracking-wider" style={{ ...textStyle, fontSize: '3rem' }}>{data.personal.name}</h1>
-                        <p className="font-light tracking-[0.2em]" style={{ ...lightTextStyle, fontSize: '1.1rem' }}>{data.personal.role}</p>
+                    <div className="flex-grow z-10">
+                        <h1 className="font-bold uppercase tracking-wider text-4xl" style={{ color: textColor }}>{data.personal.name}</h1>
+                        <p className="font-light tracking-[0.2em] text-sm mt-1" style={{ color: color }}>{data.personal.role}</p>
                     </div>
                 </header>
 
                 {/* Content Grid */}
-                <div className="grid grid-cols-12 gap-x-12 flex-grow">
-                    {/* Left Column */}
-                    <div className="col-span-5 space-y-8">
+                <div className="grid grid-cols-12 gap-x-10 flex-grow px-8">
+                    {/* Left Column (Info Sidebar) */}
+                    <div className="col-span-4 space-y-6">
                         <section>
-                            <SectionHeader icon={<MapPin size={16} />} title={t(language, 'contact')} color={color} />
-                            <div className="text-sm space-y-2 pl-4" style={lightTextStyle}>
+                            <SectionHeader icon={<MapPin size={14} />} title={t(language, 'contact')} color={color} />
+                            <div className="text-xs space-y-2 pl-3" style={lightTextStyle}>
                                 {data.personal.phone && <a href={getWhatsAppLink(data.personal.phone)} target="_blank" rel="noreferrer" className="block hover:underline">{data.personal.phone}</a>}
                                 {data.personal.email && <a href={getMailtoLink(data.personal.email)} className="block hover:underline">{data.personal.email}</a>}
-                                {data.personal.website && <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="block hover:underline">{data.personal.website}</a>}
+                                {data.personal.website && <a href={getWebsiteLink(data.personal.website)} target="_blank" rel="noreferrer" className="block hover:underline truncate">{data.personal.website}</a>}
                                 {data.personal.location && <p>{data.personal.location}</p>}
                             </div>
                         </section>
-                        {data.experience && data.experience.length > 0 && (
+
+                        {data.personal.description && (
                             <section>
-                                <SectionHeader icon={<Briefcase size={16} />} title={t(language, 'workHistory')} color={color} />
-                                <div className="space-y-4">
-                                    {data.experience.map(exp => (
-                                        <div key={exp.id}>
-                                            <h3 className="font-bold text-md" style={textStyle}>{exp.role}</h3>
-                                            <p className="text-sm font-semibold mb-1" style={{ color: color }}>{exp.company} ({exp.date})</p>
-                                            <div className="text-xs whitespace-pre-line prose max-w-none" style={lightTextStyle}>{exp.description}</div>
-                                        </div>
-                                    ))}
-                                </div>
+                                <SectionHeader icon={<User size={14} />} title={t(language, 'profile')} color={color} />
+                                <p className="text-xs whitespace-pre-line pl-3 leading-relaxed" style={lightTextStyle}>{data.personal.description}</p>
                             </section>
                         )}
-                        {data.projects && data.projects.length > 0 && (
+
+                        {skills.length > 0 && (
                             <section>
-                                <SectionHeader icon={<Code size={16} />} title={t(language, 'projects')} color={color} />
-                                <div className="space-y-4">
-                                    {data.projects.map(proj => (
-                                        <div key={proj.id}>
-                                            <a href={proj.link} target="_blank" rel="noreferrer" className="font-bold text-md hover:underline" style={{ color }}>{proj.name}</a>
-                                            <div className="text-xs whitespace-pre-line prose max-w-none mt-1" style={lightTextStyle}>{proj.description}</div>
-                                            <p className="text-xs font-semibold mt-1" style={lightTextStyle}>Technologies: {proj.technologies}</p>
-                                        </div>
+                                <SectionHeader icon={<Wrench size={14} />} title={t(language, 'skills')} color={color} />
+                                <div className="flex flex-wrap gap-1.5 pl-3">
+                                    {skills.map(skill => (
+                                        <span key={skill} className="text-[10px] py-1 px-2.5 rounded-md border" style={{ borderColor: `${color}30`, backgroundColor: `${color}08`, color: textColor }}>{skill}</span>
                                     ))}
                                 </div>
                             </section>
                         )}
                     </div>
 
-                    {/* Right Column */}
-                    <div className="col-span-7 space-y-8">
-                        {data.education && data.education.length > 0 && (
+                    {/* Right Column (Main Details) */}
+                    <div className="col-span-8 space-y-6">
+                        {data.experience && data.experience.length > 0 && (
                             <section>
-                                <SectionHeader icon={<GraduationCap size={16} />} title={t(language, 'education')} color={color} />
-                                <div className="space-y-4">
-                                    {data.education.map(edu => (
-                                        <div key={edu.id} className="flex gap-4 relative">
-                                            <div className="absolute left-1.5 top-2 h-full w-px" style={{ backgroundColor: `${color}40` }}></div>
-                                            <div className="flex-shrink-0 z-10 mt-1.5">
-                                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }}></div>
+                                <SectionHeader icon={<Briefcase size={14} />} title={t(language, 'workHistory')} color={color} />
+                                <div className="space-y-4 pl-3">
+                                    {data.experience.map(exp => (
+                                        <div key={exp.id} className="border-l-2 pl-4 ml-1" style={{ borderColor: `${color}30` }}>
+                                            <h3 className="font-bold text-sm" style={textStyle}>{exp.role}</h3>
+                                            <div className="flex justify-between text-xs font-semibold mb-1" style={{ color: color }}>
+                                                <span>{exp.company}</span>
+                                                <span className="font-mono text-gray-500">{exp.date}</span>
                                             </div>
-                                            <div>
-                                                <p className="font-semibold text-sm" style={{ color }}>{edu.date}</p>
-                                                <h3 className="font-bold text-md" style={textStyle}>{edu.degree}</h3>
-                                                <p className="text-sm font-medium mb-1" style={lightTextStyle}>{edu.institution}</p>
-                                                <p className="text-xs" style={lightTextStyle}>{edu.description}</p>
+                                            <div className="text-xs prose max-w-none leading-relaxed" style={lightTextStyle}>
+                                                {exp.description.split('\n').map((line, i) => (
+                                                    <div key={i}>{line}</div>
+                                                ))}
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </section>
                         )}
-                        {skills.length > 0 && (
+
+                        {data.education && data.education.length > 0 && (
                             <section>
-                                <SectionHeader icon={<Wrench size={16} />} title={t(language, 'skills')} color={color} />
-                                <div className="space-y-2">
-                                    {skills.map(skill => (
-                                        <p key={skill} className="text-sm font-semibold" style={textStyle}>{skill}</p>
+                                <SectionHeader icon={<GraduationCap size={14} />} title={t(language, 'education')} color={color} />
+                                <div className="space-y-4 pl-3">
+                                    {data.education.map(edu => (
+                                        <div key={edu.id} className="border-l-2 pl-4 ml-1" style={{ borderColor: `${color}30` }}>
+                                            <h3 className="font-bold text-sm" style={textStyle}>{edu.degree}</h3>
+                                            <div className="flex justify-between text-xs font-semibold mb-1" style={{ color: color }}>
+                                                <span>{edu.institution}</span>
+                                                <span className="font-mono text-gray-500">{edu.date}</span>
+                                            </div>
+                                            {edu.description && <p className="text-xs leading-relaxed" style={lightTextStyle}>{edu.description}</p>}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {data.projects && data.projects.length > 0 && (
+                            <section>
+                                <SectionHeader icon={<Code size={14} />} title={t(language, 'projects')} color={color} />
+                                <div className="space-y-4 pl-3">
+                                    {data.projects.map(proj => (
+                                        <div key={proj.id} className="border-l-2 pl-4 ml-1" style={{ borderColor: `${color}30` }}>
+                                            <h3 className="font-bold text-sm" style={{ color }}>{proj.name}</h3>
+                                            {proj.link && (
+                                                <div className="text-xs mb-1" style={lightTextStyle}>
+                                                    Link: <a href={proj.link} target="_blank" rel="noreferrer" className="hover:underline break-all" style={{ color: color }}>{proj.link}</a>
+                                                </div>
+                                            )}
+                                            <p className="text-xs whitespace-pre-line leading-relaxed" style={lightTextStyle}>{proj.description}</p>
+                                            <p className="text-xs font-semibold mt-1" style={lightTextStyle}>Technologies: {proj.technologies}</p>
+                                        </div>
                                     ))}
                                 </div>
                             </section>

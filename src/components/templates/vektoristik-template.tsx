@@ -15,7 +15,11 @@ const TimelineItem = ({ date, title, description, color, textColor }: { date: st
         <div className="w-full -mt-1">
             <p className="font-bold text-sm" style={{ color }}>{date}</p>
             <h3 className="font-bold text-lg" style={{ color: textColor }}>{title}</h3>
-            <div className="text-sm whitespace-pre-line prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>{description}</div>
+            <div className="text-sm prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
+                {description.split('\n').map((line, i) => (
+                    <div key={i}>{line}</div>
+                ))}
+            </div>
         </div>
     </div>
 );

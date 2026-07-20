@@ -60,7 +60,11 @@ export const ProfessionalTemplatePreview = ({ data, color, bgColor, textColor, f
                     <p className="text-xs font-mono" style={lightTextStyle}>{exp.date}</p>
                   </div>
                   <h4 className="font-semibold mb-2" style={{ ...fontStyle, fontSize: '1rem', ...lightTextStyle, opacity: 0.9 }}>{exp.company}</h4>
-                  <div className="text-sm whitespace-pre-line prose max-w-none prose-sm" style={lightTextStyle}>{exp.description}</div>
+                  <div className="text-sm prose max-w-none prose-sm" style={lightTextStyle}>
+                    {exp.description.split('\n').map((line, i) => (
+                      <div key={i}>{line}</div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </section>

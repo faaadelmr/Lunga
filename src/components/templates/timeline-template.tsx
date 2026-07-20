@@ -123,7 +123,11 @@ export const TimelineTemplatePreview = ({ data, color, bgColor, textColor, font,
                       <p className="text-sm font-semibold">{exp.date}</p>
                     </div>
                     <p className="text-sm mb-2" style={{ opacity: 0.8 }}>{exp.company}</p>
-                    <div className="text-sm whitespace-pre-line prose max-w-none prose-sm" style={{ opacity: 0.8 }}>{exp.description}</div>
+                    <div className="text-sm prose max-w-none prose-sm" style={{ opacity: 0.8 }}>
+                      {exp.description.split('\n').map((line, i) => (
+                        <div key={i}>{line}</div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>

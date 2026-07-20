@@ -10,7 +10,7 @@ export const initialData: ResumeData = {
     location: "Tangerang, Indonesia",
     website: "faaadelmr.dev",
     photo: "https://media.licdn.com/dms/image/v2/D5603AQE3XjaZj8ufbA/profile-displayphoto-scale_400_400/B56Z9trFHsIoAk-/0/1784251438404?e=1785974400&v=beta&t=WgSmm-FAVQUiRAwMVa9X-IoRfMF_7pyEWk1HWOhWwg4",
-    description: "Manusia yang entusias dengan website, game, pc dan teknologi lainnya. I use ai btw, suka mempelajari teknologi baru serta membuat sesuatu yang mempermudah pekerjaan ataupun kegiatan yang saya lakukan",
+    description: "Manusia yang entusias dengan website, game, pc dan teknologi lainnya. Suka mempelajari teknologi baru serta membuat sesuatu yang mempermudah pekerjaan ataupun kegiatan yang saya lakukan. I use ai btw",
   },
   experience: [
     {
@@ -18,9 +18,9 @@ export const initialData: ResumeData = {
       company: "ISOmedik",
       role: "IT Junior",
       date: "Feb 2026 - Sekarang",
-      description: `- Membuat syntax pemrograman sederhana untuk mendukung kebutuhan IT operasional.
-- Membuat dan membuat dashboard dari data report untuk visualisasi data internal.
-- Mempelajari teknologi IT baru dan membantu pemeliharaan sistem pendukung.`,
+      description: `- Membuat syntax pemrograman SQL untuk mendukung kebutuhan IT operasional.
+- Membuat dashboard dari data report untuk visualisasi data internal.
+- Mempelajari teknologi VB.net untuk membantu pemeliharaan sistem pendukung.`,
     },
     {
       id: "exp2",

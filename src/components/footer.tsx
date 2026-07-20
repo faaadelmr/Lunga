@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="flex items-center space-x-1">
             <span>Crafted by</span>
             <Link
-              href="https://faaadelmr.pages.dev"
+              href="https://faaadelmr.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline transition-colors font-medium"

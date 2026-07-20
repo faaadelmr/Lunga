@@ -47,7 +47,6 @@ export const StarlightTemplatePreview = ({ data, color, bgColor, textColor, font
                 <aside className="col-span-4 flex flex-col items-center text-center pt-8 overflow-y-auto">
                     {data.personal.photo && (
                         <div className="relative w-40 h-40 mb-5">
-                            <div className="absolute inset-0 rounded-full" style={{ backgroundColor: color, filter: 'blur(20px)', opacity: 0.5 }}></div>
                             <Image
                                 src={data.personal.photo}
                                 alt={data.personal.name}
@@ -104,7 +103,11 @@ export const StarlightTemplatePreview = ({ data, color, bgColor, textColor, font
                                                 <p className="text-xs font-mono" style={lightTextStyle}>{exp.date}</p>
                                             </div>
                                             <h4 className="font-semibold mb-1" style={{ color: color }}>{exp.company}</h4>
-                                            <div className="text-sm whitespace-pre-line prose max-w-none" style={lightTextStyle}>{exp.description}</div>
+                                            <div className="text-sm prose max-w-none" style={lightTextStyle}>
+                                                {exp.description.split('\n').map((line, i) => (
+                                                    <div key={i}>{line}</div>
+                                                ))}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

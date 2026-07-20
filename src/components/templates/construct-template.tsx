@@ -105,7 +105,11 @@ export const ConstructTemplatePreview = ({ data, color, bgColor, textColor, font
                                             </div>
                                             <p className="text-xs font-mono flex-shrink-0 text-right" style={lightTextStyle}>{exp.date}</p>
                                         </div>
-                                        <div className="text-sm whitespace-pre-line prose max-w-none mt-1" style={lightTextStyle}>{exp.description}</div>
+                                        <div className="text-sm prose max-w-none mt-1" style={lightTextStyle}>
+                                            {exp.description.split('\n').map((line, i) => (
+                                                <div key={i}>{line}</div>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

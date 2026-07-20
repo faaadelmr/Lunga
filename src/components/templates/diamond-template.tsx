@@ -93,7 +93,9 @@ export const DiamondTemplatePreview = ({ data, color, bgColor, textColor, font, 
                                             <p className="text-xs">{exp.company}</p>
                                         </div>
                                         <div className="col-span-2 text-xs prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
-                                            {exp.description}
+                                            {exp.description.split('\n').map((line, i) => (
+                                                <div key={i}>{line}</div>
+                                            ))}
                                         </div>
                                     </div>
                                 ))}

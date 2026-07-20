@@ -74,7 +74,11 @@ export const BloxTemplatePreview = ({ data, color, bgColor, textColor, font, lan
                                                 <p className="font-semibold" style={{ color: color }}>{exp.company}</p>
                                                 <p className="text-xs font-mono" style={lightTextStyle}>{exp.date}</p>
                                             </div>
-                                            <div className="text-sm whitespace-pre-line prose max-w-none mt-1" style={lightTextStyle}>{exp.description}</div>
+                                            <div className="text-sm prose max-w-none mt-1" style={lightTextStyle}>
+                                                {exp.description.split('\n').map((line, i) => (
+                                                    <div key={i}>{line}</div>
+                                                ))}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

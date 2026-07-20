@@ -39,18 +39,17 @@ export const AwesomeTemplatePreview = ({ data, color, bgColor, textColor, font, 
         <div className="bg-white rounded-2xl shadow-2xl w-full h-full relative overflow-hidden flex flex-col" style={{ ...fontStyle, backgroundColor: bgColor, color: textColor }}>
             {/* Header */}
             <header className="relative w-full h-48 flex-shrink-0">
-                <div className="absolute top-[-5rem] right-[-5rem] w-80 h-80 rounded-full" style={accentBgStyle}></div>
-                {data.personal.photo && (
-                    <div className="absolute top-4 right-12 w-40 h-40">
+                <div className="absolute top-2 right-4 w-44 h-44 rounded-full overflow-hidden shadow-md" style={accentBgStyle}>
+                    {data.personal.photo && (
                         <Image
                             src={data.personal.photo}
                             alt={data.personal.name}
-                            width={160}
-                            height={160}
-                            className="object-cover rounded-full shadow-lg z-10"
+                            fill
+                            className="object-cover"
+                            priority
                         />
-                    </div>
-                )}
+                    )}
+                </div>
                 <div className="absolute top-16 left-12 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-md">
                     <h1 className="text-4xl font-bold text-slate-900">{data.personal.name}</h1>
                     <div className="px-4 py-1 mt-2 inline-block rounded-md" style={accentBgStyle}>
@@ -74,7 +73,11 @@ export const AwesomeTemplatePreview = ({ data, color, bgColor, textColor, font, 
                                     <div key={exp.id}>
                                         <h3 className="font-bold text-md">{exp.role}</h3>
                                         <p className="text-sm font-semibold" style={accentColorStyle}>{exp.company} ({exp.date})</p>
-                                        <div className="text-xs whitespace-pre-line prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>{exp.description}</div>
+                                        <div className="text-xs prose max-w-none" style={{ color: textColor, opacity: 0.8 }}>
+                                            {exp.description.split('\n').map((line, i) => (
+                                                <div key={i}>{line}</div>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

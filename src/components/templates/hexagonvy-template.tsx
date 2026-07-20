@@ -101,7 +101,11 @@ export const HexagonvyTemplatePreview = ({ data, color, bgColor, textColor, font
                                         </div>
                                         <div className="col-span-2">
                                             <h3 className="font-bold uppercase text-md">{exp.role}</h3>
-                                            <div className="text-sm whitespace-pre-line prose max-w-none mt-1" style={lightTextStyle}>{exp.description}</div>
+                                            <div className="text-sm prose max-w-none mt-1" style={lightTextStyle}>
+                                                {exp.description.split('\n').map((line, i) => (
+                                                    <div key={i}>{line}</div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 ))}

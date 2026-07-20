@@ -91,7 +91,11 @@ export const LedgerTemplatePreview = ({ data, color, bgColor, textColor, font, l
                                             <p className="text-xs font-mono" style={lightTextStyle}>{exp.date}</p>
                                         </div>
                                         <h4 className="font-semibold text-sm mb-1" style={{ color }}>{exp.company}</h4>
-                                        <div className="whitespace-pre-line prose max-w-none text-xs" style={lightTextStyle}>{exp.description}</div>
+                                        <div className="prose max-w-none text-xs" style={lightTextStyle}>
+                                            {exp.description.split('\n').map((line, i) => (
+                                                <div key={i}>{line}</div>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

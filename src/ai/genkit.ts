@@ -12,11 +12,6 @@ export const ai = genkit({
 // Model type for type safety matching the user request
 export type AiModel = 
   | 'gemini-3.5-flash'
-  | 'gemini-3.1-flash-lite'
-  | 'gemini-3-flash-preview'
-  | 'gemini-3.1-pro-preview'
-  | 'gemini-pro-latest'
-  | 'gemini-flash-latest'
   | 'gemini-flash-lite-latest';
 
 // Export functions to get the specific models by string identifier
