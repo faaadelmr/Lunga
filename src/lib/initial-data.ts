@@ -60,7 +60,7 @@ export const initialData: ResumeData = {
       id: 'proj2',
       name: 'ohmycode',
       description: 'Source Control in Browser. Platform pengelolaan source control berbasis web yang memungkinkan manajemen repositori, staging, commit, dan kontrol versi secara langsung di dalam peramban, serta fitur Snippet dan Compare code.',
-      technologies: 'React, Next.js, TypeScript, Tailwind CSS',
+      technologies: 'Svelte, SvelteKit, TypeScript, Tailwind CSS, Vite',
       link: 'https://www.npmjs.com/package/ohmycode'
     }
   ],
