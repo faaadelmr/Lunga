@@ -58,10 +58,10 @@ export const initialData: ResumeData = {
     },
     {
       id: 'proj2',
-      name: 'BabynumTime',
-      description: 'Web app tracker tumbuh kembang bayi untuk mencatat waktu menyusui/minum, penggantian popok, volume ASI ibu, waktu pompa ASI (pumping), serta dilengkapi dengan analisis AI untuk mendeteksi kesehatan BAB bayi.',
+      name: 'ohmycode',
+      description: 'Source Control in Browser. Platform pengelolaan source control berbasis web yang memungkinkan manajemen repositori, staging, commit, dan kontrol versi secara langsung di dalam peramban, serta fitur Snippet dan Compare code.',
       technologies: 'React, Next.js, TypeScript, Tailwind CSS',
-      link: 'babynum.vercel.app'
+      link: 'https://www.npmjs.com/package/ohmycode'
     }
   ],
   skills: "SQL, VB.Net, AI-assisted Coding, Dashboard & Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim",
