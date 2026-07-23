@@ -17,8 +17,7 @@ export function EditorPanel() {
     <div className="flex flex-col h-full min-h-0 bg-card border-r shadow-lg xl:shadow-none">
       <header className="p-6 border-b flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-primary">CV-lization</h1>
-          <p className="text-sm text-muted-foreground">#cobaajadulu</p>
+          <h1 className="text-2xl font-headline font-bold text-primary">Lunga</h1>
         </div>
         <div className="flex items-center gap-2">
           <Select value={selectedLanguage} onValueChange={(value) => setSelectedLanguage(value as Language)}>

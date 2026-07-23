@@ -5,7 +5,6 @@ import { Mail, Phone, MapPin, Globe, Wrench, Code, Briefcase, GraduationCap, Use
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
-import { themeStandards } from '@/lib/theme-standards';
 
 // Web Preview Component
 export const ClassicTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {

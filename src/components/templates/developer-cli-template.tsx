@@ -34,7 +34,7 @@ export const DeveloperCliTemplatePreview = ({ data, color, bgColor, textColor, f
             <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
           </div>
           <div className="text-xs font-semibold flex items-center gap-1.5">
-            <span>cv-lization.sh — bash</span>
+            <span>lunga.sh — bash</span>
           </div>
           <div className="w-12"></div> {/* Spacer */}
         </div>

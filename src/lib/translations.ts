@@ -145,7 +145,7 @@ export const translations: Translations = {
         template: 'Template',
         // AI Assist Panel
         aiReWriteTitle: 'AI Resume Scanner & Re-Write',
-        aiReWriteDescription: 'Upload your current resume (PDF/Image) to extract information into CV-lization editor instantly using AI.',
+        aiReWriteDescription: 'Upload your current resume (PDF/Image) to extract information into Lunga editor instantly using AI.',
         selectAiModel: 'Select AI Model',
         uploadCvFile: 'Upload CV (PDF or Image)',
         reWriteWithAi: 'Re-Write with AI',
@@ -222,7 +222,7 @@ export const translations: Translations = {
         template: 'Templat',
         // AI Assist Panel
         aiReWriteTitle: 'AI Pemindai & Penulis Ulang Resume',
-        aiReWriteDescription: 'Unggah resume Anda saat ini (PDF/Gambar) untuk mengekstrak informasi ke editor CV-lization secara instan menggunakan AI.',
+        aiReWriteDescription: 'Unggah resume Anda saat ini (PDF/Gambar) untuk mengekstrak informasi ke editor Lunga secara instan menggunakan AI.',
         selectAiModel: 'Pilih Model AI',
         uploadCvFile: 'Unggah CV (PDF atau Gambar)',
         reWriteWithAi: 'Tulis Ulang dengan AI',

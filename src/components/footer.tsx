@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-row justify-between items-center text-xs text-muted-foreground">
           <div>
             &copy; {new Date().getFullYear()}{" "}
-            <span className="font-medium text-yellow-500">CV-lization</span>. All rights reserved.
+            <span className="font-medium text-yellow-500">Lunga</span>. All rights reserved.
           </div>
           <div className="flex items-center space-x-1">
             <span>Crafted by</span>
