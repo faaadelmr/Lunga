@@ -1,4 +1,3 @@
-
 export interface ResumeData {
   personal: {
     name: string;
@@ -38,6 +37,12 @@ export type Template = 'git-folio' | 'ats-friendly' | 'blox' | 'ledger' | 'const
 export type Font = string;
 export type Language = 'en' | 'id';
 
+export type SupportedAiModel =
+  | 'cerebras/gemma-4-31b'
+  | 'llama-3.3-70b-versatile'
+  | 'openrouter/auto'
+  | 'openrouter/free'
+  | 'gemini-2.0-flash-lite';
 
 export interface ResumeContextProps {
   resumeData: ResumeData;
@@ -54,9 +59,10 @@ export interface ResumeContextProps {
   setSelectedFont: React.Dispatch<React.SetStateAction<Font>>;
   selectedLanguage: Language;
   setSelectedLanguage: React.Dispatch<React.SetStateAction<Language>>;
-  selectedAiModel: 'gemini-3.5-flash' | 'gemini-flash-lite-latest';
-  setSelectedAiModel: React.Dispatch<React.SetStateAction<'gemini-3.5-flash' | 'gemini-flash-lite-latest'>>;
+  selectedAiModel: SupportedAiModel;
+  setSelectedAiModel: React.Dispatch<React.SetStateAction<SupportedAiModel>>;
   handleAnalyzeResume: (photoDataUri: string) => Promise<void>;
   isAiLoading: boolean;
+  aiProgress: number;
+  aiProgressStep: string;
 }
-

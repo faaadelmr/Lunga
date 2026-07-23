@@ -2,7 +2,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from 'react';
-import type { ResumeContextProps, ResumeData, Template, Font, Language } from '@/lib/types';
+import type { ResumeContextProps, ResumeData, Template, Font, Language, SupportedAiModel } from '@/lib/types';
 import { initialData } from '@/lib/initial-data';
 import { analyzeResumeWithModel } from '@/ai/flows/analyze-resume-with-model';
 import { templates } from '@/components/editor/style-panel';
@@ -18,13 +18,37 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [selectedFont, setSelectedFont] = useState<Font>('Lato');
   const [selectedLanguage, setSelectedLanguage] = useState<Language>('en');
   const [isAiLoading, setIsAiLoading] = useState(false);
-  const [selectedAiModel, setSelectedAiModel] = useState<'gemini-3.5-flash' | 'gemini-flash-lite-latest'>('gemini-flash-lite-latest');
+  const [aiProgress, setAiProgress] = useState(0);
+  const [aiProgressStep, setAiProgressStep] = useState('');
+  const [selectedAiModel, setSelectedAiModel] = useState<SupportedAiModel>('cerebras/gemma-4-31b');
 
   const handleAnalyzeResume = async (photoDataUri: string) => {
     setIsAiLoading(true);
+    setAiProgress(5);
+    setAiProgressStep('Memproses & menyiapkan berkas...');
+
+    // Progress step interval helper
+    let progressTimer: NodeJS.Timeout;
+
     try {
-      // Use Gemini AI Genkit (Server Action)
+      // Step 1: File reading
+      setAiProgress(20);
+      setAiProgressStep('Mengekstrak teks & OCR dokumen...');
+
+      // Simulate incremental progress while calling server action
+      progressTimer = setInterval(() => {
+        setAiProgress((prev) => {
+          if (prev < 85) return prev + Math.floor(Math.random() * 8) + 2;
+          return prev;
+        });
+      }, 400);
+
+      // Step 2: Call Gemini AI Genkit
       const analyzedData = await analyzeResumeWithModel({ photoDataUri, model: selectedAiModel });
+
+      clearInterval(progressTimer);
+      setAiProgress(90);
+      setAiProgressStep('Menyusun data CV & formatting...');
 
       // Add unique IDs to experience, education and projects items
       const experienceWithIds = analyzedData.experience.map(exp => ({ ...exp, id: crypto.randomUUID() }));
@@ -41,13 +65,13 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         experience: experienceWithIds,
         education: educationWithIds,
         projects: projectsWithIds,
-      }
+      };
 
+      setAiProgress(100);
+      setAiProgressStep('Selesai!');
       setResumeData(fullData);
     } catch (error: any) {
       console.error("Failed to analyze resume:", error);
-
-      // Throw the error so the calling component can handle it with toast
       throw new Error(`AI Analysis failed: ${error?.message || 'Unknown error occurred'}`);
     } finally {
       setIsAiLoading(false);
@@ -73,6 +97,8 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setSelectedAiModel,
     handleAnalyzeResume,
     isAiLoading,
+    aiProgress,
+    aiProgressStep,
   };
 
   return (

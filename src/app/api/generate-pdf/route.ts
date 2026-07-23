@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
 
     // Set viewport to match preview size (840x1188 pixels)
     await page.setViewport({
-      width: 840, // Same as preview width
-      height: 1188, // Same as preview height
+      width: 840,
+      height: 1188,
       deviceScaleFactor: 2,
     });
 

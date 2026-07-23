@@ -10,11 +10,8 @@ export const ai = genkit({
 });
 
 // Model type for type safety matching the user request
-export type AiModel = 
-  | 'gemini-3.5-flash'
-  | 'gemini-flash-lite-latest';
+export type GeminiAiModel = 'gemini-2.0-flash-lite';
 
-// Export functions to get the specific models by string identifier
-export const getGeminiModel = (modelName: AiModel): string => {
+export const getGeminiModel = (modelName: GeminiAiModel): string => {
   return `googleai/${modelName}`;
 };

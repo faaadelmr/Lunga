@@ -37,7 +37,7 @@ function RenderContent() {
                     bgColor: bgColorParam || '#ffffff',
                     textColor: textColorParam || '#000000',
                     font: (fontParam as Font) || 'Inter',
-                    language: (languageParam as Language) || 'en'
+                    language: (languageParam as Language) || 'en',
                 });
             } catch (e) {
                 console.error('Error parsing resume data:', e);

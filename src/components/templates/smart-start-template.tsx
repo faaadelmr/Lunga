@@ -1,11 +1,9 @@
-
 "use client";
 import type { ResumeData, Font, Language } from '@/lib/types';
-import { Mail, Phone, MapPin, Globe, CheckSquare, Briefcase, GraduationCap, Star, Code } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, CheckSquare, Briefcase, GraduationCap, Code, User } from 'lucide-react';
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
-import { themeStandards } from '@/lib/theme-standards';
 
 const SectionHeader = ({ icon, title, color }: { icon: React.ReactNode, title: string, color: string }) => (
     <div className="flex items-center gap-2 mb-2">
@@ -56,11 +54,16 @@ export const SmartStartTemplatePreview = ({ data, color, bgColor, textColor, fon
                             </div>
                         </div>
                     ) : (
-                        <div className="w-32 h-36" style={{ backgroundColor: `${color}99` }}></div>
+                        <div className="bg-white p-1.5 shadow-lg">
+                            <div className="relative w-32 h-36 border-4 border-white bg-slate-100 flex items-center justify-center">
+                                <User className="w-12 h-12 text-slate-400" />
+                                <div className="absolute inset-0 border" style={{ borderColor: color }}></div>
+                            </div>
+                        </div>
                     )}
                 </div>
 
-                <div className={data.personal.photo ? "mt-44" : "mt-4"}>
+                <div className="mt-44">
                     <section className="mb-4">
                         <SectionHeader icon={<CheckSquare size={12} color={color} />} title={t(language, 'contact')} color="white" />
                         <div className="space-y-1.5 text-xs" style={sidebarTextStyle}>
@@ -110,14 +113,14 @@ export const SmartStartTemplatePreview = ({ data, color, bgColor, textColor, fon
                                         <p className="font-semibold text-xs" style={mainAccentColorStyle}>{exp.company} | {exp.date}</p>
                                         <div className="text-xs mt-0.5 leading-relaxed" style={lightTextStyle}>
                                             {exp.description.split('\n')
-                  .map(line => line.trim())
-                  .filter(line => line.length > 0)
-                  .map((line, i) => (
-                    <div key={i} className="flex items-start gap-1.5">
-                      <span className="flex-shrink-0 select-none">•</span>
-                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
-                    </div>
-                  ))}
+                                                .map(line => line.trim())
+                                                .filter(line => line.length > 0)
+                                                .map((line, i) => (
+                                                    <div key={i} className="flex items-start gap-1.5">
+                                                        <span className="flex-shrink-0 select-none">•</span>
+                                                        <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                                                    </div>
+                                                ))}
                                         </div>
                                     </div>
                                 ))}

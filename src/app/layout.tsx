@@ -4,8 +4,26 @@ import { Toaster } from "@/components/ui/toaster";
 import { ResumeProvider } from '@/context/resume-context';
 
 export const metadata: Metadata = {
-  title: 'CV-lization',
-  description: 'Apps Resume Builder with preview and AI reWriter for old your CV',
+  title: 'CV-lization - AI-Powered Resume Builder & Professional CV Generator',
+  description: 'Create, rewrite, and design ATS-friendly professional resumes instantly with AI assistance and beautiful multi-style templates.',
+  keywords: ['Resume Builder', 'CV Generator', 'ATS Resume', 'AI Resume Rewriter', 'Professional CV', 'Next.js CV Builder'],
+  authors: [{ name: 'CV-lization Team' }],
+  openGraph: {
+    title: 'CV-lization - AI-Powered Resume Builder',
+    description: 'Build and optimize your ATS-friendly resume with instant AI enhancement.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'CV-lization',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CV-lization - AI Resume Builder',
+    description: 'Craft ATS-ready resumes with modern templates and AI enhancement.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

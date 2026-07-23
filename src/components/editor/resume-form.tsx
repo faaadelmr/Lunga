@@ -112,12 +112,47 @@ export function ResumeForm() {
            <div className="space-y-2">
             <Label>Profile Photo</Label>
             {resumeData.personal.photo ? (
-              <div className="relative w-32 h-32">
-                <Image src={resumeData.personal.photo} alt="Profile" layout="fill" className="rounded-full object-cover" />
-                <Button variant="ghost" size="icon" className="absolute top-0 right-0 text-destructive" onClick={removePhoto}><X className="w-4 h-4"/></Button>
+              <div className="flex items-center gap-4">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary/20 shadow-md group">
+                  <Image src={resumeData.personal.photo} alt="Profile" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={removePhoto}
+                      title="Remove Photo"
+                      className="p-1.5 bg-destructive text-white rounded-full hover:scale-110 transition-transform"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label
+                    htmlFor="photo-change"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md cursor-pointer border transition-colors"
+                  >
+                    Change Picture
+                  </Label>
+                  <input
+                    id="photo-change"
+                    type="file"
+                    accept="image/*"
+                    onChange={handlePhotoChange}
+                    className="hidden"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="text-xs text-destructive hover:bg-destructive/10 hover:text-destructive h-7 px-3"
+                    onClick={removePhoto}
+                  >
+                    Remove Picture
+                  </Button>
+                </div>
               </div>
             ) : (
-               <Input id="photo" name="photo" type="file" accept="image/*" onChange={handlePhotoChange}/>
+              <Input id="photo" name="photo" type="file" accept="image/*" onChange={handlePhotoChange} />
             )}
            </div>
 

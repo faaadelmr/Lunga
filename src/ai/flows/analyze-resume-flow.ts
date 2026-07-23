@@ -69,16 +69,17 @@ const prompt = ai.definePrompt({
   name: 'analyzeResumePrompt',
   input: { schema: AnalyzeResumeInputSchema },
   output: { schema: AnalyzeResumeOutputSchema },
-  prompt: `You are an expert resume parser. Analyze the provided resume content (which can be from an image or extracted text from a PDF) and extract the information into a structured JSON format.
+  prompt: `Analyze and parse the resume content into structured JSON.
 
-Extract the following sections:
-- Personal Details (name, role, email, phone, location, website, and a professional summary/objective as description)
-- Work Experience (company, role, dates, description)
-- Education (institution, degree, dates, description)
-- Projects (name, description, technologies used, and a link)
-- Skills (as a single comma-separated string)
-
-Pay close attention to formatting the extracted text correctly, especially for descriptions which may contain bullet points. Maintain the original language of the resume. If a section like 'Projects' is not found, return an empty array for it.
+RULES:
+1. READ WHOLE TEXT & SEMANTIC CLASSIFICATION: Read the ENTIRE document text first to understand context before categorizing. Analyze whether a sentence/paragraph is a candidate's personal summary (merge into "personal.description"), a job achievement, or an education detail.
+2. NO SUMMARIZATION / NO TRUNCATION: DO NOT summarize, shorten, omit, or rewrite any user text. The goal is to transfer the FULL original content of the user's CV into the new template structure without losing any sentences, bullet points, or details.
+3. OCR & DEGREE FIX: Fix OCR errors (e.g. "31"->"S1", "32"->"S2", "33"->"S3", "03"->"D3", "Sentor"->"Senior"). Do NOT alter candidate names.
+4. STRICT SEPARATION (EXPERIENCE vs PROJECTS):
+   - "experience" MUST contain ONLY formal career/employment roles, job titles, and company positions (e.g. "Editor-in-Chief at Publication", "Software Engineer at Tech Corp").
+   - "projects" MUST contain ONLY specific standalone apps, websites, software tools, or built products (e.g. "E-Commerce App", "Portfolio Website"). NEVER mix company job roles into projects or vice versa.
+5. SKILLS: Deduce skills from both "Skills" sections and experience/project text as a comma-separated string.
+6. NULL POLICY: Use "" for missing strings and [] for missing arrays. If NO projects exist, return "projects": []. Never output placeholder objects or "null".
 
 Resume Content:
 {{media url=photoDataUri}}

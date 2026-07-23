@@ -1,11 +1,9 @@
-
 "use client";
 import type { ResumeData, Font, Language } from '@/lib/types';
-import { Mail, Phone, MapPin, Globe, Briefcase, GraduationCap, User, Wrench, Facebook, Twitter, Instagram, Linkedin, Code } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, Briefcase, GraduationCap, User, Wrench, Code } from 'lucide-react';
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
-import { themeStandards } from '@/lib/theme-standards';
 
 const WavyBackground = ({ color, position }: { color: string, position: 'top' | 'bottom' }) => (
     <div className={`absolute left-0 right-0 w-full h-48 ${position === 'top' ? 'top-0' : 'bottom-0'}`} style={{ color }}>
@@ -39,7 +37,7 @@ const SectionHeader = ({ icon, title, color }: { icon: React.ReactNode, title: s
 
 // Helper function to determine if a color is light or dark
 const isColorLight = (hexColor: string) => {
-    if (!hexColor.startsWith('#')) return false;
+    if (!hexColor || !hexColor.startsWith('#')) return false;
     const hex = hexColor.replace('#', '');
     if (hex.length !== 6) return false;
     const r = parseInt(hex.substring(0, 2), 16);
@@ -58,13 +56,13 @@ export const QueteTemplatePreview = ({ data, color, bgColor, textColor, font, la
     const headerTextColor = isColorLight(color) ? '#1E293B' : '#FFFFFF';
 
     return (
-        <div className="relative w-full h-full p-6 overflow-hidden" style={{ ...fontStyle, backgroundColor: bgColor }}>
+        <div className="relative w-full h-full p-6 overflow-hidden flex flex-col justify-between" style={{ ...fontStyle, backgroundColor: bgColor }}>
             <WavyBackground color={color} position="top" />
             <WavyBackground color={color} position="bottom" />
 
-            <main className="relative z-10 w-full h-full flex flex-col pt-8 overflow-y-auto">
+            <main className="relative z-10 w-full h-full flex flex-col pt-4 overflow-y-auto">
                 {/* Header */}
-                <header className="flex items-center w-full mb-4 pl-4">
+                <header className="flex items-center w-full mb-6 pl-4 relative z-20">
                     {data.personal.photo && (
                         <div className="w-20 h-20 relative rounded-full overflow-hidden shadow-lg flex-shrink-0 mr-4 border-2 border-white bg-white">
                             <Image
@@ -75,9 +73,9 @@ export const QueteTemplatePreview = ({ data, color, bgColor, textColor, font, la
                             />
                         </div>
                     )}
-                    <div className="flex-grow z-10">
-                        <h1 className="font-bold uppercase tracking-wider text-2xl" style={{ color: textColor }}>{data.personal.name}</h1>
-                        <p className="font-light tracking-[0.2em] text-xs mt-0.5" style={{ color: color }}>{data.personal.role}</p>
+                    <div className="flex-grow z-20">
+                        <h1 className="font-bold uppercase tracking-wider text-2xl drop-shadow-sm" style={{ color: headerTextColor }}>{data.personal.name}</h1>
+                        <p className="font-semibold tracking-[0.2em] text-xs mt-1 drop-shadow-sm" style={{ color: headerTextColor, opacity: 0.9 }}>{data.personal.role}</p>
                     </div>
                 </header>
 
@@ -129,14 +127,14 @@ export const QueteTemplatePreview = ({ data, color, bgColor, textColor, font, la
                                             </div>
                                             <div className="text-xs leading-relaxed" style={lightTextStyle}>
                                                 {exp.description.split('\n')
-                  .map(line => line.trim())
-                  .filter(line => line.length > 0)
-                  .map((line, i) => (
-                    <div key={i} className="flex items-start gap-1.5">
-                      <span className="flex-shrink-0 select-none">•</span>
-                      <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
-                    </div>
-                  ))}
+                                                    .map(line => line.trim())
+                                                    .filter(line => line.length > 0)
+                                                    .map((line, i) => (
+                                                        <div key={i} className="flex items-start gap-1.5">
+                                                            <span className="flex-shrink-0 select-none">•</span>
+                                                            <span className="flex-1">{line.replace(/^[-*•]\s*/, '')}</span>
+                                                        </div>
+                                                    ))}
                                             </div>
                                         </div>
                                     ))}

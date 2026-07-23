@@ -5,8 +5,8 @@ export const initialData: ResumeData = {
   personal: {
     name: "Fadel Muhamad Rifai",
     role: "Web Developer",
-    email: "faaadelmr@gmail.com",
-    phone: "085156630686",
+    email: "faaadelmr@outlook.co.id",
+    phone: "08765432100",
     location: "Tangerang, Indonesia",
     website: "faaadelmr.dev",
     photo: "https://media.licdn.com/dms/image/v2/D5603AQE3XjaZj8ufbA/profile-displayphoto-scale_400_400/B56Z9trFHsIoAk-/0/1784251438404?e=1785974400&v=beta&t=WgSmm-FAVQUiRAwMVa9X-IoRfMF_7pyEWk1HWOhWwg4",
@@ -59,7 +59,7 @@ export const initialData: ResumeData = {
     {
       id: 'proj2',
       name: 'ohmycode',
-      description: 'Source Control in Browser. Platform pengelolaan source control berbasis web yang memungkinkan manajemen repositori, staging, commit, dan kontrol versi secara langsung di dalam peramban, serta fitur Snippet dan Compare code.',
+      description: 'Source Control di Browser. Platform pengelolaan source control berbasis web yang memungkinkan manajemen repositori, staging, commit, dan kontrol versi secara langsung di dalam peramban, serta fitur Snippet dan Compare code.',
       technologies: 'Svelte, SvelteKit, TypeScript, Tailwind CSS, Vite',
       link: 'https://www.npmjs.com/package/ohmycode'
     }
