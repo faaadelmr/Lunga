@@ -18,6 +18,7 @@ export function EditorPanel() {
       <header className="p-6 border-b flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-headline font-bold text-primary">Lunga</h1>
+          <p className="text-xs text-muted-foreground mt-0.5">{t(selectedLanguage, 'appDescription')}</p>
         </div>
         <div className="flex items-center gap-2">
           <Select value={selectedLanguage} onValueChange={(value) => setSelectedLanguage(value as Language)}>

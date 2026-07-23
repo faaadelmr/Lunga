@@ -14,6 +14,7 @@ export type TranslationKey =
     | 'expertise'
     | 'portfolio'
     // Navigation & Tabs
+    | 'appDescription'
     | 'aiReWrite'
     | 'content'
     | 'style'
@@ -98,6 +99,7 @@ export const translations: Translations = {
         expertise: 'Expertise',
         portfolio: 'Portfolio',
         // Navigation & Tabs
+        appDescription: 'Resume builder with AI Rewriter',
         aiReWrite: 'AI Re-Write',
         content: 'Content',
         style: 'Style',
@@ -175,6 +177,7 @@ export const translations: Translations = {
         expertise: 'Keahlian',
         portfolio: 'Portofolio',
         // Navigation & Tabs
+        appDescription: 'Pembuat resume dengan Penulis Ulang AI',
         aiReWrite: 'AI Re-Write',
         content: 'Konten',
         style: 'Gaya',

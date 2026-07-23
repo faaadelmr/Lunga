@@ -34,6 +34,7 @@ import { DeveloperCliTemplatePreview } from "./templates/developer-cli-template"
 import { NeoBrutalistTemplatePreview } from "./templates/neo-brutalist-template";
 import type { Font } from "@/lib/types";
 
+import Footer from "./footer";
 
 const templateMap = {
   'git-folio': {
@@ -204,7 +205,7 @@ export function ResumePreviewPanel() {
   const fontClass = `font-${selectedFont.toLowerCase().replace(' ', '-')}`;
 
   return (
-    <div className="h-full min-h-0 bg-secondary flex flex-col items-center justify-start p-4 md:p-8 overflow-auto">
+    <div className="h-full min-h-[600px] xl:min-h-0 bg-secondary flex flex-col items-center justify-start p-4 md:p-8 overflow-auto">
       <div className="w-full max-w-4xl flex justify-end mb-4 flex-shrink-0">
         {isClient ? (
           <Button onClick={handleDownload} disabled={loading} className="flex items-center gap-2 px-4 py-2">
@@ -266,7 +267,7 @@ export function ResumePreviewPanel() {
       </div>
 
       {/* Information and tips panel */}
-      <div className="w-full max-w-4xl mt-6 text-center">
+      <div className="w-full max-w-4xl mt-6 text-center shrink-0">
         <div className="bg-muted/30 rounded-lg p-4 max-w-2xl mx-auto">
           <p className="text-sm text-muted-foreground mb-2">
             {t(selectedLanguage, 'previewNotice')}
@@ -275,6 +276,10 @@ export function ResumePreviewPanel() {
             {t(selectedLanguage, 'paperNotice')}
           </p>
         </div>
+      </div>
+
+      <div className="mt-auto pt-4 shrink-0 w-full flex justify-center">
+        <Footer />
       </div>
     </div>
   );
