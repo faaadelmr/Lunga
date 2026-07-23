@@ -32,13 +32,29 @@ export function ResumeForm() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setResumeData(prev => ({
-          ...prev,
-          personal: {
-            ...prev.personal,
-            photo: reader.result as string,
+        const img = new window.Image();
+        img.onload = () => {
+          // Crop and resize photo to standard 400x400 square canvas
+          const canvas = document.createElement('canvas');
+          canvas.width = 400;
+          canvas.height = 400;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            const minDim = Math.min(img.width, img.height);
+            const sx = (img.width - minDim) / 2;
+            const sy = (img.height - minDim) / 2;
+            ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 400, 400);
+            const resizedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+            setResumeData(prev => ({
+              ...prev,
+              personal: {
+                ...prev.personal,
+                photo: resizedDataUrl,
+              }
+            }));
           }
-        }));
+        };
+        img.src = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
@@ -111,7 +127,10 @@ export function ResumeForm() {
         <AccordionTrigger className="p-4 font-headline text-lg hover:no-underline"><User className="mr-2 text-primary" /> {t(selectedLanguage, 'personalDetails')}</AccordionTrigger>
         <AccordionContent className="p-4 pt-0 space-y-4">
            <div className="space-y-2">
-            <Label>{t(selectedLanguage, 'profilePhoto')}</Label>
+            <div className="flex justify-between items-center">
+              <Label>{t(selectedLanguage, 'profilePhoto')}</Label>
+              <span className="text-[11px] text-muted-foreground">Standard: 400×400 px (1:1)</span>
+            </div>
             {resumeData.personal.photo ? (
               <div className="flex items-center gap-4">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary/20 shadow-md group">

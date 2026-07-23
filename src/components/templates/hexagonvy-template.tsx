@@ -1,11 +1,9 @@
-
 "use client";
 import type { ResumeData, Font, Language } from '@/lib/types';
-import { Mail, Phone, MapPin, Globe, Code } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import Image from 'next/image';
 import { t } from '@/lib/translations';
 import { getMailtoLink, getWhatsAppLink, getWebsiteLink } from '@/lib/contact-links';
-import { themeStandards } from '@/lib/theme-standards';
 
 const SectionHeader = ({ title, color, textColor }: { title: string, color: string, textColor: string }) => (
     <div className='flex items-center gap-3 mb-4'>
@@ -17,7 +15,6 @@ const SectionHeader = ({ title, color, textColor }: { title: string, color: stri
 export const HexagonvyTemplatePreview = ({ data, color, bgColor, textColor, font, language = 'en' }: { data: ResumeData, color: string, bgColor: string, textColor: string, font?: Font, language?: Language }) => {
     const fontStyle = { fontFamily: font };
     const lightTextStyle = { color: textColor, opacity: 0.7 };
-    const lighterTextStyle = { color: textColor, opacity: 0.5 };
     const skills = (data.skills || '').split(',').map(s => s.trim()).filter(Boolean);
 
     return (
@@ -25,14 +22,13 @@ export const HexagonvyTemplatePreview = ({ data, color, bgColor, textColor, font
             {/* Header */}
             <header className="text-center mb-8 flex flex-col items-center">
                 {data.personal.photo && (
-                    <div className="relative w-40 h-44 mb-6" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}>
+                    <div className="relative w-36 h-36 mb-6" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}>
                         <div className="w-full h-full" style={{ backgroundColor: color }}>
-                            <div className="relative w-full h-full" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)', transform: 'scale(0.95)' }}>
+                            <div className="relative w-full h-full" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)', transform: 'scale(0.93)' }}>
                                 <Image
                                     src={data.personal.photo}
                                     alt={data.personal.name}
-                                    width={160}
-                                    height={160}
+                                    fill
                                     className="object-cover"
                                 />
                             </div>
