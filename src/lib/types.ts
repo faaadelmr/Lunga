@@ -44,9 +44,31 @@ export type SupportedAiModel =
   | 'openrouter/free'
   | 'gemini-2.0-flash-lite';
 
+export interface ResignData {
+  senderName: string;
+  senderRole: string;
+  senderEmail: string;
+  senderPhone: string;
+  recipientName: string;
+  recipientRole: string;
+  companyName: string;
+  letterCity: string;
+  letterDate: string;
+  locationDate: string;
+  lastWorkingDay: string;
+  reasonOption: string;
+  customMessage: string;
+}
+
+export type AppMode = 'resume' | 'resign';
+
 export interface ResumeContextProps {
   resumeData: ResumeData;
   setResumeData: React.Dispatch<React.SetStateAction<ResumeData>>;
+  resignData: ResignData;
+  setResignData: React.Dispatch<React.SetStateAction<ResignData>>;
+  activeMode: AppMode;
+  setActiveMode: React.Dispatch<React.SetStateAction<AppMode>>;
   selectedTemplate: Template;
   setSelectedTemplate: React.Dispatch<React.SetStateAction<Template>>;
   selectedColor: string;

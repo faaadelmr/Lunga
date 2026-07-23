@@ -149,7 +149,7 @@ export function ResumePreviewPanel() {
 
   const TemplatePreview = templateMap[selectedTemplate].preview;
 
-  const fileName = resumeData.personal.name ? `${resumeData.personal.name.replace(/\s+/g, '-')}-Resume.pdf` : 'resume.pdf';
+  const fileName = resumeData.personal.name ? `${resumeData.personal.name.replace(/\s+/g, '-')}_lungaresume.pdf` : 'lungaresume.pdf';
 
   const handleDownload = async () => {
     setLoading(true);

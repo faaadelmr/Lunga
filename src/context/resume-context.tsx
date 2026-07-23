@@ -2,8 +2,8 @@
 "use client";
 
 import React, { createContext, useContext, useState } from 'react';
-import type { ResumeContextProps, ResumeData, Template, Font, Language, SupportedAiModel } from '@/lib/types';
-import { initialData } from '@/lib/initial-data';
+import type { ResumeContextProps, ResumeData, ResignData, AppMode, Template, Font, Language, SupportedAiModel } from '@/lib/types';
+import { initialData, initialResignData } from '@/lib/initial-data';
 import { analyzeResumeWithModel } from '@/ai/flows/analyze-resume-with-model';
 import { templates } from '@/components/editor/style-panel';
 
@@ -11,6 +11,8 @@ const ResumeContext = createContext<ResumeContextProps | undefined>(undefined);
 
 export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [resumeData, setResumeData] = useState<ResumeData>(initialData);
+  const [resignData, setResignData] = useState<ResignData>(initialResignData);
+  const [activeMode, setActiveMode] = useState<AppMode>('resume');
   const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0].id);
   const [selectedColor, setSelectedColor] = useState<string>('#2c3e50'); // Midnight Blue
   const [selectedBgColor, setSelectedBgColor] = useState<string>('#FFFFFF'); // White
@@ -81,6 +83,10 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const value = {
     resumeData,
     setResumeData,
+    resignData,
+    setResignData,
+    activeMode,
+    setActiveMode,
     selectedTemplate,
     setSelectedTemplate,
     selectedColor,

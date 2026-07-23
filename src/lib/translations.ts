@@ -76,7 +76,39 @@ export type TranslationKey =
     | 'generatingPdf'
     | 'loadingPreview'
     | 'previewNotice'
-    | 'paperNotice';
+    | 'paperNotice'
+    // Resign Builder Translations
+    | 'resignBuilderTitle'
+    | 'resignBuilderDesc'
+    | 'resignBannerTitle'
+    | 'resignBannerDesc'
+    | 'senderInfo'
+    | 'recipientInfo'
+    | 'resignDatesAndReason'
+    | 'recipientName'
+    | 'recipientRole'
+    | 'companyName'
+    | 'letterCity'
+    | 'letterDate'
+    | 'locationDate'
+    | 'lastWorkingDay'
+    | 'reasonLabel'
+    | 'reasonPlaceholder'
+    | 'closingMessageLabel'
+    | 'closingMessagePlaceholder'
+    | 'printDownloadResignPdf'
+    | 'resignPreviewNotice'
+    | 'dearSalutation'
+    | 'subjectResign'
+    | 'salutation'
+    | 'resignParagraph1'
+    | 'resignParagraph1Mid'
+    | 'resignParagraph1At'
+    | 'resignParagraph1End'
+    | 'resignParagraph2Prefix'
+    | 'resignParagraph3Default'
+    | 'resignParagraph4'
+    | 'sincerely';
 
 type Translations = {
     [key in Language]: {
@@ -162,6 +194,38 @@ export const translations: Translations = {
         loadingPreview: 'Loading Preview...',
         previewNotice: 'Your resume preview is shown above. Click "Download PDF" to save a print-ready version.',
         paperNotice: 'For best results, use standard A4 paper when printing your resume.',
+        // Resign Builder Translations
+        resignBuilderTitle: 'Lunga Resign Builder',
+        resignBuilderDesc: 'Create a Resignation Letter',
+        resignBannerTitle: 'Think Twice.. Finding a Job These Days is Tough! ⚠️',
+        resignBannerDesc: 'Before resigning, take a moment to reflect. Remember your financial commitments, the smiles of your family at home, and the people around you. Stay strong and keep fighting! Because after hardship comes ease. If your decision is truly final, proceed to draft your resignation letter.',
+        senderInfo: 'Your Details (Sender)',
+        recipientInfo: 'Manager & Company Details',
+        resignDatesAndReason: 'Date & Reason for Resignation',
+        recipientName: 'Manager / HRD Name',
+        recipientRole: 'Recipient Title / Role',
+        companyName: 'Company Name',
+        letterCity: 'City / Location',
+        letterDate: 'Letter Date',
+        locationDate: 'City & Date',
+        lastWorkingDay: 'Last Working Day',
+        reasonLabel: 'Primary Reason for Leaving',
+        reasonPlaceholder: 'Select resignation reason...',
+        closingMessageLabel: 'Appreciation & Farewell Message',
+        closingMessagePlaceholder: 'Write your appreciation message or additional notes to the company...',
+        printDownloadResignPdf: 'Print / Download Resign Letter PDF',
+        resignPreviewNotice: 'Resignation Letter Preview',
+        dearSalutation: 'To:',
+        subjectResign: 'Subject: Resignation Letter',
+        salutation: 'Dear Sir/Madam,',
+        resignParagraph1: 'Through this letter, I,',
+        resignParagraph1Mid: 'currently serving as',
+        resignParagraph1At: 'at',
+        resignParagraph1End: 'would like to submit my formal resignation from this position. My last working day will be on',
+        resignParagraph2Prefix: 'The primary reason for my resignation is to',
+        resignParagraph3Default: 'I express my sincere gratitude for the guidance, trust, and incredible opportunities provided to me during my tenure with the company.',
+        resignParagraph4: 'I remain committed to maintaining professionalism and ensuring a smooth transition and handover process until my last day. Thank you for your understanding and support.',
+        sincerely: 'Sincerely,',
     },
     id: {
         // Section Headers
@@ -240,6 +304,38 @@ export const translations: Translations = {
         loadingPreview: 'Memuat Pratinjau...',
         previewNotice: 'Pratinjau CV Anda ditampilkan di atas. Klik "Unduh PDF" untuk menyimpan versi siap cetak.',
         paperNotice: 'Untuk hasil terbaik, gunakan kertas A4 standar saat mencetak CV Anda.',
+        // Resign Builder Translations
+        resignBuilderTitle: 'Lunga Resign Builder',
+        resignBuilderDesc: 'Buat Surat Pengunduran Diri',
+        resignBannerTitle: 'Pikir-Pikir Lagi.. Jadi WNI Sekarang Cari Kerja Itu Susah! ⚠️',
+        resignBannerDesc: 'Sebelum resign, coba renungkan baik-baik. Ingat cicilan, ingat senyum keluarga di rumah, dan orang-orang sekitar. Tetap semangat bertahan! Karena dibalik kesusahan maka ada kemudahan. Kalau keputusanmu sudah benar-benar bulat, baru lanjutkan buat surat resign nya.',
+        senderInfo: 'Identitas Anda (Pengirim)',
+        recipientInfo: 'Atasan & Perusahaan',
+        resignDatesAndReason: 'Tanggal & Alasan Resign',
+        recipientName: 'Nama Atasan / HRD',
+        recipientRole: 'Jabatan Penerima',
+        companyName: 'Nama Perusahaan',
+        letterCity: 'Kota Surat',
+        letterDate: 'Tanggal Surat',
+        locationDate: 'Kota & Tanggal Surat',
+        lastWorkingDay: 'Hari Terakhir Bekerja (Last Working Day)',
+        reasonLabel: 'Alasan Utama Resign',
+        reasonPlaceholder: 'Pilih alasan resign...',
+        closingMessageLabel: 'Pesan Ucapan Terima Kasih & Penutup',
+        closingMessagePlaceholder: 'Tuliskan ucapan terima kasih atau pesan tambahan untuk perusahaan...',
+        printDownloadResignPdf: 'Cetak / Unduh PDF Surat Resign',
+        resignPreviewNotice: 'Pratinjau Surat Resign',
+        dearSalutation: 'Kepada Yth.',
+        subjectResign: 'Perihal: Surat Pengunduran Diri (Resign)',
+        salutation: 'Dengan hormat,',
+        resignParagraph1: 'Melalui surat ini, saya',
+        resignParagraph1Mid: 'yang saat ini menjabat sebagai',
+        resignParagraph1At: 'di',
+        resignParagraph1End: 'bermaksud untuk mengajukan pengunduran diri dari posisi dan jabatan tersebut. Hari terakhir saya bekerja secara efektif adalah pada tanggal',
+        resignParagraph2Prefix: 'Adapun alasan pengunduran diri saya ini adalah untuk',
+        resignParagraph3Default: 'Saya mengucapkan terima kasih yang sebesar-besarnya atas bimbingan, kepercayaan, serta kesempatan luar biasa yang telah diberikan kepada saya selama bergabung dan berkembang bersama tim perusahaan.',
+        resignParagraph4: 'Saya berkomitmen untuk tetap menjaga profesionalisme dan siap membimbing proses serah terima pekerjaan (handover) hingga tanggal efektif pengunduran diri saya. Demikian surat pengunduran diri ini saya buat dengan penuh kesadaran dan tanpa paksaan dari pihak manapun.',
+        sincerely: 'Hormat saya,',
     },
 };
 

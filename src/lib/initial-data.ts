@@ -66,3 +66,20 @@ export const initialData: ResumeData = {
   ],
   skills: "SQL, VB.Net, AI-assisted Coding, Dashboard & Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim",
 };
+
+export const initialResignData = {
+  senderName: "",
+  senderRole: "",
+  senderEmail: "",
+  senderPhone: "",
+  recipientName: "",
+  recipientRole: "",
+  companyName: "",
+  letterCity: "",
+  letterDate: "",
+  locationDate: "",
+  lastWorkingDay: "",
+  reasonOption: "",
+  customMessage: "",
+};
+
