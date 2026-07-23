@@ -33,6 +33,9 @@ import { GlassmorphismTemplatePreview } from "../templates/glassmorphism-templat
 import { DeveloperCliTemplatePreview } from "../templates/developer-cli-template";
 import { NeoBrutalistTemplatePreview } from "../templates/neo-brutalist-template";
 import { GoogleFontLoader } from "../google-font-loader";
+import { t } from "@/lib/translations";
+
+import { ExternalLink } from "lucide-react";
 
 export const templates: { id: Template, name: string, component: React.FC<any> }[] = [
   { id: 'glassmorphism', name: 'Glassmorphism', component: GlassmorphismTemplatePreview },
@@ -106,15 +109,10 @@ const bgColors = [
 
 
 const fonts: { id: Font; name: string }[] = [
-  { id: 'Lato', name: 'Lato' },
   { id: 'Inter', name: 'Inter' },
-  { id: 'Space Grotesk', name: 'Space Grotesk' },
+  { id: 'Lato', name: 'Lato' },
   { id: 'Roboto', name: 'Roboto' },
-  { id: 'Montserrat', name: 'Montserrat' },
-  { id: 'Open Sans', name: 'Open Sans' },
   { id: 'Merriweather', name: 'Merriweather' },
-  { id: 'Source Sans Pro', name: 'Source Sans Pro' },
-  { id: 'Playfair Display', name: 'Playfair Display' },
 ];
 
 const ColorPicker = ({ title, colors, selectedColor, onColorChange }: { title: string, colors: { id: string, value: string, name: string }[], selectedColor: string, onColorChange: (color: string) => void }) => {
@@ -239,32 +237,32 @@ export function StylePanel() {
   return (
     <div className="space-y-8">
       <ColorPicker
-        title="Text Color"
+        title={t(selectedLanguage, 'textColor')}
         colors={textColors}
         selectedColor={selectedTextColor}
         onColorChange={setSelectedTextColor}
       />
       <ColorPicker
-        title="Background Color"
+        title={t(selectedLanguage, 'backgroundColor')}
         colors={bgColors}
         selectedColor={selectedBgColor}
         onColorChange={setSelectedBgColor}
       />
       <ColorPicker
-        title="Accent Color"
+        title={t(selectedLanguage, 'accentColor')}
         colors={accentColors}
         selectedColor={selectedColor}
         onColorChange={setSelectedColor}
       />
       <div>
-        <h3 className="text-xl font-headline mb-4">Font</h3>
+        <h3 className="text-xl font-headline mb-4">{t(selectedLanguage, 'fontFamily')}</h3>
         <GoogleFontLoader font={selectedFont} onValidation={setIsFontValid} />
         <div className="space-y-3">
           <div>
-            <Label htmlFor="font-select">Select a preset font family</Label>
+            <Label htmlFor="font-select">{t(selectedLanguage, 'selectPresetFont')}</Label>
             <Select value={fonts.some(f => f.id === selectedFont) ? selectedFont : "custom-font"} onValueChange={(value) => {
               if (value === "custom-font") {
-                setSelectedFont("Poppins");
+                setSelectedFont("");
               } else {
                 setSelectedFont(value);
               }
@@ -287,10 +285,21 @@ export function StylePanel() {
           {!fonts.some(f => f.id === selectedFont) && (
             <div>
               <div className="flex justify-between items-center">
-                <Label htmlFor="custom-font-input">Paste custom Google Font name</Label>
+                <div className="flex items-center gap-1.5">
+                  <Label htmlFor="custom-font-input">{t(selectedLanguage, 'customFontInputLabel')}</Label>
+                  <a
+                    href="https://fonts.google.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline font-medium"
+                    title="Find font names on Google Fonts"
+                  >
+                    Google Fonts <ExternalLink className="w-3 h-3 inline" />
+                  </a>
+                </div>
                 {!isFontValid && (
                   <span className="text-xs text-destructive font-medium flex items-center gap-1 animate-pulse">
-                    ⚠️ Font tidak ditemukan
+                    ⚠️ {t(selectedLanguage, 'fontNotFoundWarning')}
                   </span>
                 )}
               </div>
@@ -306,22 +315,7 @@ export function StylePanel() {
         </div>
       </div>
       <div>
-        <h3 className="text-xl font-headline mb-4">Section Language</h3>
-        <div className="space-y-2">
-          <Label htmlFor="language-select">Select section title language</Label>
-          <Select value={selectedLanguage} onValueChange={(value) => setSelectedLanguage(value as Language)}>
-            <SelectTrigger id="language-select">
-              <SelectValue placeholder="Select language" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="en">🇬🇧 English</SelectItem>
-              <SelectItem value="id">🇮🇩 Bahasa Indonesia</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-      <div>
-        <h3 className="text-xl font-headline mb-4">Template</h3>
+        <h3 className="text-xl font-headline mb-4">{t(selectedLanguage, 'template')}</h3>
         <div className="grid grid-cols-2 gap-4">
           {templates.map(template => (
             <TemplateCard

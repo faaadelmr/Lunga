@@ -15,6 +15,7 @@ import { TimelineTemplatePreview } from "./templates/timeline-template";
 import { Skeleton } from "./ui/skeleton";
 import { cn } from "@/lib/utils";
 import { GoogleFontLoader } from "./google-font-loader";
+import { t } from "@/lib/translations";
 import { SmartStartTemplatePreview } from "./templates/smart-start-template";
 import { VektoristikTemplatePreview } from "./templates/vektoristik-template";
 import { AwesomeTemplatePreview } from "./templates/awesome-template";
@@ -212,12 +213,12 @@ export function ResumePreviewPanel() {
             ) : (
               <Download className="h-4 w-4" />
             )}
-            {loading ? "Generating PDF..." : "Download PDF"}
+            {loading ? t(selectedLanguage, 'generatingPdf') : t(selectedLanguage, 'downloadPdf')}
           </Button>
         ) : (
           <Button disabled className="flex items-center gap-2 px-4 py-2">
             <FileText className="h-4 w-4" />
-            Loading Preview...
+            {t(selectedLanguage, 'loadingPreview')}
           </Button>
         )}
       </div>
@@ -256,7 +257,7 @@ export function ResumePreviewPanel() {
               <div className="w-full h-full flex items-center justify-center p-8">
                 <div className="text-center">
                   <Skeleton className="w-full h-full max-w-md mx-auto rounded-lg" />
-                  <p className="mt-4 text-sm text-muted-foreground">Loading your resume preview...</p>
+                  <p className="mt-4 text-sm text-muted-foreground">{t(selectedLanguage, 'loadingPreview')}</p>
                 </div>
               </div>
             )}
@@ -268,10 +269,10 @@ export function ResumePreviewPanel() {
       <div className="w-full max-w-4xl mt-6 text-center">
         <div className="bg-muted/30 rounded-lg p-4 max-w-2xl mx-auto">
           <p className="text-sm text-muted-foreground mb-2">
-            Your resume preview is shown above. Click "Download PDF" to save a print-ready version.
+            {t(selectedLanguage, 'previewNotice')}
           </p>
           <p className="text-xs text-muted-foreground/80">
-            For best results, use standard A4 paper when printing your resume.
+            {t(selectedLanguage, 'paperNotice')}
           </p>
         </div>
       </div>

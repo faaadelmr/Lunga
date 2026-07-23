@@ -11,9 +11,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2, Wand2, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
+import { t } from "@/lib/translations";
 
 export function AiAssistPanel() {
-  const { handleAnalyzeResume, isAiLoading, selectedAiModel, setSelectedAiModel, aiProgress, aiProgressStep } = useResume();
+  const { handleAnalyzeResume, isAiLoading, selectedAiModel, setSelectedAiModel, aiProgress, aiProgressStep, selectedLanguage } = useResume();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isPdf, setIsPdf] = useState(false);
@@ -37,8 +38,8 @@ export function AiAssistPanel() {
       if (!isAllowed) {
         toast({
           variant: "destructive",
-          title: "Format Berkas Tidak Didukung",
-          description: "Format yang didukung: PDF, PNG, JPG/JPEG, WEBP, BMP, dan PNM.",
+          title: t(selectedLanguage, 'formatNotSupportedTitle'),
+          description: t(selectedLanguage, 'formatNotSupportedDesc'),
         });
         e.target.value = ''; // Reset input
         setPreviewUrl(null);
@@ -72,8 +73,8 @@ export function AiAssistPanel() {
       try {
         await handleAnalyzeResume(previewUrl);
         toast({
-          title: "Success!",
-          description: "Resume analyzed successfully. Your CV has been updated.",
+          title: t(selectedLanguage, 'aiSuccessTitle'),
+          description: t(selectedLanguage, 'aiSuccessDesc'),
         });
       } catch (error: any) {
         // Check for common AI-related errors and provide helpful messages
@@ -107,7 +108,7 @@ export function AiAssistPanel() {
 
         toast({
           variant: "destructive",
-          title: "AI Analysis Failed",
+          title: "Analysis Failed",
           description: errorMessage,
         });
       }
@@ -123,14 +124,14 @@ export function AiAssistPanel() {
   return (
     <Card className="bg-background border">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 font-headline"><Wand2 /> AI Re-write</CardTitle>
+        <CardTitle className="flex items-center gap-2 font-headline"><Wand2 /> {t(selectedLanguage, 'aiReWriteTitle')}</CardTitle>
         <CardDescription>
-          Upload an image or PDF of your old CV, and AI will re-write it for you.
+          {t(selectedLanguage, 'aiReWriteDescription')}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-2">
-          <Label htmlFor="ai-model-select">Select AI Model</Label>
+          <Label htmlFor="ai-model-select">{t(selectedLanguage, 'selectAiModel')}</Label>
           <Select value={selectedAiModel} onValueChange={(value) => setSelectedAiModel(value as any)}>
             <SelectTrigger id="ai-model-select">
               <SelectValue placeholder="Select AI model" />
@@ -145,7 +146,7 @@ export function AiAssistPanel() {
       </div>
 
         <div className="space-y-2">
-          <Label htmlFor="resume-upload">Upload Resume (PDF, PNG, JPG, WEBP, BMP, PNM)</Label>
+          <Label htmlFor="resume-upload">{t(selectedLanguage, 'uploadCvFile')}</Label>
           <Input id="resume-upload" type="file" onChange={handleFileChange} accept=".pdf,.png,.jpg,.jpeg,.webp,.bmp,.pnm" />
         </div>
 
@@ -175,7 +176,7 @@ export function AiAssistPanel() {
         {isAiLoading && (
           <div className="space-y-2 p-4 bg-muted/40 rounded-lg border animate-pulse">
             <div className="flex justify-between items-center text-xs font-medium">
-              <span className="text-primary">{aiProgressStep || "Menganalisis CV..."}</span>
+              <span className="text-primary">{aiProgressStep || t(selectedLanguage, 'analyzingProcessing')}</span>
               <span className="text-muted-foreground">{aiProgress}%</span>
             </div>
             <div className="w-full bg-secondary h-2.5 rounded-full overflow-hidden">
@@ -191,12 +192,12 @@ export function AiAssistPanel() {
           {isAiLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Menganalisis ({aiProgress}%)...
+              {t(selectedLanguage, 'analyzingProcessing')} ({aiProgress}%)...
             </>
           ) : (
             <>
               <Wand2 className="mr-2 h-4 w-4" />
-              Analyze Resume
+              {t(selectedLanguage, 'reWriteWithAi')}
             </>
           )}
         </Button>
