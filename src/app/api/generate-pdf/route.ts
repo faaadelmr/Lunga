@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from '@sparticuz/chromium';
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,18 +15,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Determine executable path for local vs Vercel serverless environment
+    const isDev = process.env.NODE_ENV === 'development';
+    let executablePath: string;
+
+    if (isDev) {
+      // Common default installation paths for Chrome/Chromium locally
+      executablePath =
+        process.platform === 'win32'
+          ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+          : process.platform === 'darwin'
+          ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+          : '/usr/bin/google-chrome';
+    } else {
+      executablePath = await chromium.executablePath();
+    }
+
+    const chromiumAny = chromium as any;
+
     // Launch browser
     const browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--no-first-run',
-        '--no-zygote',
-        '--disable-gpu',
-      ],
+      args: isDev ? ['--no-sandbox', '--disable-setuid-sandbox'] : chromium.args,
+      defaultViewport: isDev ? { width: 840, height: 1188 } : (chromiumAny.defaultViewport || undefined),
+      executablePath,
+      headless: isDev ? true : (chromiumAny.headless === 'shell' ? 'shell' : Boolean(chromiumAny.headless)),
     });
 
     const page = await browser.newPage();

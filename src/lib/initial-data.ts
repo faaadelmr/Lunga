@@ -9,7 +9,7 @@ export const initialData: ResumeData = {
     phone: "08765432100",
     location: "Tangerang, Indonesia",
     website: "faaadelmr.dev",
-    photo: "https://media.licdn.com/dms/image/v2/D5603AQE3XjaZj8ufbA/profile-displayphoto-scale_400_400/B56Z9trFHsIoAk-/0/1784251438404?e=1785974400&v=beta&t=WgSmm-FAVQUiRAwMVa9X-IoRfMF_7pyEWk1HWOhWwg4",
+    photo: "https://media.licdn.com/dms/image/v2/D5635AQF30NS5UPEwDw/profile-framedphoto-shrink_400_400/B56aAamKcYIcAU-/0/1787152607436?e=1787760000&v=beta&t=LOvXe7Rwo6Phj__CJhDJrhrlmpN12nw76FCAs0lJEVA",
     description: "Manusia yang entusias dengan website, game, pc dan teknologi lainnya. Suka mempelajari teknologi baru serta membuat sesuatu yang mempermudah pekerjaan ataupun kegiatan yang saya lakukan. I use ai btw",
   },
   experience: [
