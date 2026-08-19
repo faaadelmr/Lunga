@@ -28,7 +28,9 @@ export async function POST(request: NextRequest) {
           ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
           : '/usr/bin/google-chrome';
     } else {
-      executablePath = await chromium.executablePath();
+      // Use remote GitHub release binary for Vercel Serverless environment
+      const CHROMIUM_URL = 'https://github.com/sparticuz/chromium/releases/download/v133.0.0/chromium-v133.0.0-pack.tar';
+      executablePath = await chromium.executablePath(CHROMIUM_URL);
     }
 
     const chromiumAny = chromium as any;

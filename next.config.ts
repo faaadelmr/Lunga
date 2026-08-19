@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '10mb',
     },
   },
-  serverExternalPackages: ['tesseract.js', 'pdf-to-img', 'pdf-parse'],
+  serverExternalPackages: ['tesseract.js', 'pdf-to-img', 'pdf-parse', '@sparticuz/chromium', 'puppeteer-core'],
   images: {
     remotePatterns: [
       {
