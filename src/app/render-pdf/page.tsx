@@ -19,6 +19,27 @@ function RenderContent() {
     } | null>(null);
 
     useEffect(() => {
+        const handleData = (payload: any) => {
+            if (payload && payload.data) {
+                setTemplateData(payload);
+            }
+        };
+
+        // 1. Direct injection from Puppeteer via window.__PDF_DATA__
+        if (typeof window !== 'undefined' && (window as any).__PDF_DATA__) {
+            handleData((window as any).__PDF_DATA__);
+            return;
+        }
+
+        // 2. Custom event listener as fallback
+        const onPdfDataReady = (e: any) => {
+            if (e.detail) {
+                handleData(e.detail);
+            }
+        };
+        window.addEventListener('pdf-data-ready', onPdfDataReady);
+
+        // 3. Fallback to URL searchParams (for manual URL debugging)
         const dataParam = searchParams.get('data');
         const templateParam = searchParams.get('template');
         const colorParam = searchParams.get('color');
@@ -43,6 +64,10 @@ function RenderContent() {
                 console.error('Error parsing resume data:', e);
             }
         }
+
+        return () => {
+            window.removeEventListener('pdf-data-ready', onPdfDataReady);
+        };
     }, [searchParams]);
 
     if (!templateData) {

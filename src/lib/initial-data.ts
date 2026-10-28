@@ -18,9 +18,10 @@ export const initialData: ResumeData = {
       company: "ISOmedik",
       role: "IT Junior",
       date: "Feb 2026 - Sekarang",
-      description: `- Membuat syntax pemrograman SQL untuk mendukung kebutuhan IT operasional.
-- Membuat dashboard dari data report untuk visualisasi data internal.
-- Mempelajari teknologi VB.net untuk membantu pemeliharaan sistem pendukung.`,
+      description: `- Membuat sintaks SQL untuk kebutuhan operasional IT.
+- Membangun dashboard untuk visualisasi laporan data internal.
+- Mempelajari teknologi VB.Net untuk pemeliharaan sistem pendukung.
+- Menganalisa dan memperbaiki PC karyawan yang bermasalah.`,
     },
     {
       id: "exp2",
@@ -64,7 +65,7 @@ export const initialData: ResumeData = {
       link: 'https://www.npmjs.com/package/ohmycode'
     }
   ],
-  skills: "SQL, VB.Net, AI-assisted Coding, Dashboard & Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim",
+  skills: "SQL, VB.Net, AI-assisted Coding, Dashboard & Data Visualization, Advanced Excel, Data Reconciliation, Administrasi Klaim, Instalasi Sistem Operasi & Software, Troubleshooting Hardware & Software, Maintenance & Repair PC",
 };
 
 export const initialResignData = {

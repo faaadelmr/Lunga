@@ -52,25 +52,41 @@ export async function POST(request: NextRequest) {
       deviceScaleFactor: 2,
     });
 
-    // Build URL for the render page
-    const baseUrl = request.nextUrl.origin;
-    const params = new URLSearchParams({
-      data: encodeURIComponent(JSON.stringify(resumeData)),
+    // Payload for rendering the resume
+    const pdfPayload = {
+      data: resumeData,
       template: template || 'modern',
       color: color || '#1f2937',
       bgColor: bgColor || '#ffffff',
       textColor: textColor || '#000000',
       font: font || 'Inter',
       language: language || 'en',
-    });
+    };
 
-    const renderUrl = `${baseUrl}/render-pdf?${params.toString()}`;
+    // Inject data directly into window before scripts execute (bypasses URL length / HTTP 431 header limits)
+    await page.evaluateOnNewDocument((payload) => {
+      (window as any).__PDF_DATA__ = payload;
+    }, pdfPayload);
 
-    // Navigate to the render page
+    // Navigate to the render page without passing large data in the query string
+    const baseUrl = request.nextUrl.origin;
+    const renderUrl = `${baseUrl}/render-pdf`;
+
     await page.goto(renderUrl, {
       waitUntil: 'networkidle0',
       timeout: 30000,
     });
+
+    // Ensure data availability and trigger event in case of hydration delay
+    await page.evaluate((payload) => {
+      if (!(window as any).__PDF_DATA__) {
+        (window as any).__PDF_DATA__ = payload;
+      }
+      window.dispatchEvent(new CustomEvent('pdf-data-ready', { detail: payload }));
+    }, pdfPayload);
+
+    // Wait until resume container is rendered
+    await page.waitForSelector('#pdf-render-container', { timeout: 15000 });
 
     // Wait for fonts and content to load
     await page.evaluate(() => {
@@ -78,7 +94,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Additional wait to ensure all content is rendered
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     // Generate PDF
     const pdfBuffer = await page.pdf({
